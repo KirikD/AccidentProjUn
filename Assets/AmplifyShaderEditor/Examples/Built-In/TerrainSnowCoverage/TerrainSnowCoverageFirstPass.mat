@@ -26,19 +26,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1f15cf5ef214af64ea8b51cd45c4322e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageAlbedo:
-        m_Texture: {fileID: 2800000, guid: 138df4511c079324cabae1f7f865c1c1, type: 3}
+        m_Texture: {fileID: 2800000, guid: aecf84d48cf51df47bc68c0a54ca13e3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageNormal:
-        m_Texture: {fileID: 2800000, guid: 77fdad851e93f394c9f8a1b1a63b56f3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8afcfa156bd748845a668170dccdd2fc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1f15cf5ef214af64ea8b51cd45c4322e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal0:
@@ -58,23 +58,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Splat0:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 907f49c6ac8bde04ab3d515d05918b4c, type: 3}
+        m_Scale: {x: 100, y: 20}
         m_Offset: {x: 0, y: 0}
     - _Splat1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 907f49c6ac8bde04ab3d515d05918b4c, type: 3}
+        m_Scale: {x: 100, y: 20}
         m_Offset: {x: 0, y: 0}
     - _Splat2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 907f49c6ac8bde04ab3d515d05918b4c, type: 3}
+        m_Scale: {x: 100, y: 20}
         m_Offset: {x: 0, y: 0}
     - _Splat3:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 14f108c2127a7084090bd7833fb87da3, type: 3}
+        m_Scale: {x: 100, y: 20}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 4112a019314dad94f9ffc2f8481f31bc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f15cf5ef214af64ea8b51cd45c4322e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -90,8 +90,8 @@ Material:
     - _Smoothness: 0.168
     - _SnowCoverageAmount: -1
     - _SnowCoverageFalloff: 0.156
-    - _TransitionDistance: 2.34
-    - _TransitionFalloff: 2.19
+    - _TransitionDistance: 2.52
+    - _TransitionFalloff: 0
     - __dirty: 0
     m_Colors:
     - <noninit>: {r: 0, g: 1.4560136e-33, b: 0, a: 1.4560077e-33}
