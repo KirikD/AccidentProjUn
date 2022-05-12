@@ -1,0 +1,4 @@
+SwitchCane_Desktop_1.spm: 1486
+SwitchCane_Desktop_2.spm: 1756
+SwitchCane_Desktop_Cluster_1.spm: 9847
+SwitchCane_Desktop_Cluster_2.spm: 10064

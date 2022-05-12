@@ -1,0 +1,3 @@
+Stump_Desktop.spm: 1294
+Stump_Desktop_2.spm: 771
+Stump_Desktop_3.spm: 1237
