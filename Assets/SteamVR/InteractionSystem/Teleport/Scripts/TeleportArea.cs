@@ -121,6 +121,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				areaMesh.sharedMaterial = Teleport.instance.areaVisibleMaterial;
 			}
+			areaMesh.enabled = false;
 		}
 
 
