@@ -13,8 +13,10 @@ public class SatrterLogic : MonoBehaviour
     {
          player = GameObject.Find("Player");
     }
-
+    [Header("Текст окончания теста в конце теста")]
     public Text EndTextTest;
+    [Header("Кнопочка продолжить тест и вернуться назад")]
+    public GameObject NextBtt, TestAgain;
     public void TestResults()
     {
         int MistakesCount = 0;
@@ -22,7 +24,8 @@ public class SatrterLogic : MonoBehaviour
         {
             for (int ii = 0; ii < loot.Count; ii++)
             {
-                if (loot[i].questionsObjs[i].isOn != loot[i].questTrues[i])
+                Debug.Log(i+" "+loot[i].questionsObjs[ii].isOn +" + " + loot[i].questTrues[ii]);
+                if (loot[i].questionsObjs[ii].isOn != loot[i].questTrues[ii])
                 {
                     MistakesCount += 1; 
                 }
@@ -31,8 +34,15 @@ public class SatrterLogic : MonoBehaviour
             }
 
         }
-        Debug.Log("MistakesCount "  + MistakesCount);
-        EndTextTest.text = "MistakesCount " + MistakesCount;
+        Debug.Log("MistakesCount "  + MistakesCount/2);
+        EndTextTest.text = "Вы не прошли тест и допустили " + MistakesCount/2 + " ошибки ";
+        if (MistakesCount == 0)
+        {
+            EndTextTest.text = "Идеально пройденный тест! Нет ошибок!";
+            NextBtt.SetActive(true);
+        }
+        else
+        { TestAgain.SetActive(true); }
     }
     //
     public void DragAvaterTo3DgameScen(Transform pos) // просто передвигаем плеера в старт игры ивсе
