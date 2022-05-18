@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 public class VagonSelector : MonoBehaviour
 {  // все данные для одной стороны вагона
@@ -40,6 +41,7 @@ public class VagonSelector : MonoBehaviour
     [Tooltip("Уборка за габарит пути")]
     public Toggle OutToOveralSize;  //Уборка за габарит пути
 
+    [Header("Путь и наклон")]
     [Tooltip("Путь разрушен")]
     public Toggle DestroedRails;  //Путь разрушен
     [Tooltip("Нарушен габарит по соседнему пути")]
@@ -60,20 +62,30 @@ public class VagonSelector : MonoBehaviour
     [Tooltip("Не зажато")]
     public Toggle NeZazato;  //Уборка за габарит пути
 
-
+    public GameObject TelezkaPanel;
+    public GameObject UborkaPanel;
+    public GameObject ScepkaPanel;
+    UnityEvent ElementSetter_MyEvent; //  ElementSetter_MyEvent.Invoke();
     void Start()
     {
-        
+        ElementSetter.OnSelectedEvent += SetTogleFieldsToArry;
     }
 
     // Update is called once per frame
     public void SetTogleFieldsToArry(string vagName)
     {
+        string[] vagNames = vagName.Split('#');
+        nameVag = vagNames[1]; Debug.Log(vagName + " ADgd: ");
         for (int i = 0; i < PoezdItems.Count; i++)
         {
-            if (PoezdItems[i].name == vagName)
+            if (PoezdItems[i].name == vagNames[1])
             {  // реализуем тут присвоение состояний тоглов при нажатии кнопки применить на интерфейсе
-                 Debug.Log("PoezdItems: " + PoezdItems[i].name + i); 
+                 Debug.Log("PoezdItems: " + PoezdItems[i].name + i);
+                if (vagNames[2] == "Scepka1")
+                { ScepkaPanel.SetActive(true); }
+                if (vagNames[2] == "Platform")
+                { UborkaPanel.SetActive(true); }
+
             }  
         }
     }
@@ -82,9 +94,7 @@ public class VagonSelector : MonoBehaviour
     public class VagonItem
     {
         [Header("ВАГОН Номер")]
-        public string name; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы
-       
-
+        public string name; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы       
 
         [Header("Сход меньше 50 см ")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья")]
@@ -118,7 +128,7 @@ public class VagonSelector : MonoBehaviour
         [Header("Уборка за габарит пути")]
         [Tooltip("Уборка за габарит пути")]
         public bool OutToOveralSizebool;  //Уборка за габарит пути
-
+        [Header("Путь и наклон")]
         [Tooltip("Путь разрушен")]
         public bool DestroedRailbools;  //Путь разрушен
         [Tooltip("Нарушен габарит по соседнему пути")]

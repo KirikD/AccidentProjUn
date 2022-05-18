@@ -3,6 +3,7 @@
 using HTC.UnityPlugin.ColliderEvent;
 using HTC.UnityPlugin.Utility;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -47,10 +48,20 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         for (int i = matChangers.Count - 1; i >= 0; --i) { matChangers[i].heighlightButton = button; }
         ListPool<MaterialChangerLaserPointer>.Release(matChangers);
     }
-
+    float[] currWidth;
     private void Start()
     {
-        StartsFuncs?.Invoke();
+        GetComponentsInChildren(true, s_rederers);
+        if (s_rederers.Count > 0)
+        {
+            currWidth = new float[s_rederers.Count];
+            for (int i = s_rederers.Count - 1; i >= 0; --i)
+            {
+                    currWidth[i] = s_rederers[i].material.GetFloat("_ASEOutlineWidth");
+            }
+        }
+
+                StartsFuncs?.Invoke();
         UpdateMaterialState();
     }
 
@@ -115,7 +126,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
     public void UpdateMaterialState()
     {
         Color OutlCol = Color.black;
-        float w = -0.001f;
+        float w = -0.5f;
         Material targetMat;
         targetMat = Normal;
         if (drags.Count > 0)
@@ -126,18 +137,23 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         else if (presses.Count > 0)
         {
             // targetMat = Pressed; 
-            SetChildRendererCol(Color.red, Color.red, 0.01f);
+            
             //Hold = !Hold;
            
-            if (once) { once = false; Hold = Hold ? false : true; }
-            PressedFuncs?.Invoke();
+            if (once) 
+            { 
+                once = false; Hold = Hold ? false : true;
+                SetChildRendererCol(Color.red, Color.red, 2);
+                PressedFuncs?.Invoke();
+            }
+            
         }
         else if (hovers.Count > 0)
         {
             once = true; onceB = true;
             // targetMat = Hovered; 
            
-            SetChildRendererCol(Color.yellow, Color.green, 0.001f);
+            SetChildRendererCol(Color.yellow, Color.green, 1);
             HoveredFuncs?.Invoke();
         }
         else
@@ -146,7 +162,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             {
                 
                 onceB = false;
-                if (SelectedHold) { if (Hold) { OutlCol = Color.red; w = 0.01f; } else { OutlCol = Color.black; w = -0.001f; } }
+                if (SelectedHold) { if (Hold) { OutlCol = Color.red; w = 3; } else { OutlCol = Color.black; w = -0.01f; } }
                 SetChildRendererCol(Color.white, OutlCol, w);
                 HoveredEndFuncs?.Invoke();
             }
@@ -165,9 +181,21 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         {
             for (int i = s_rederers.Count - 1; i >= 0; --i)
             { // s_rederers[i].sharedMaterial.color = targetCol;
-                s_rederers[i].material.SetColor("_Color", targetCol);
-                s_rederers[i].material.SetColor("_ASEOutlineColor", outlColor);
-                s_rederers[i].material.SetFloat("_ASEOutlineWidth", width);
+                List<Material> myMaterials = s_rederers[i].materials.ToList();
+                Material[] tmpMat = new Material[myMaterials.Count];
+                for (int ii = 0; ii < myMaterials.Count; ii++)
+                {
+                   
+                    tmpMat[ii] = myMaterials[ii];
+                    tmpMat[ii].SetColor("_Color", targetCol);
+                    tmpMat[ii].SetColor("_ASEOutlineColor", outlColor);
+                    tmpMat[ii].SetFloat("_ASEOutlineWidth", currWidth[i] * width);
+
+                }
+                s_rederers[i].GetComponent<Renderer>().materials = tmpMat;
+                //s_rederers[i].material.SetColor("_Color", targetCol);
+                //s_rederers[i].material.SetColor("_ASEOutlineColor", outlColor);
+                //s_rederers[i].material.SetFloat("_ASEOutlineWidth", currWidth[i] * width );
             }
 
             s_rederers.Clear();
