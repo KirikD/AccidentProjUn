@@ -71,10 +71,11 @@ public class VagonSelector : MonoBehaviour
         ElementSetter.OnSelectedEvent += SetTogleFieldsToArry;
     }
 
-    int vagIndexList;
+    int vagIndexList; string fullVagPathName;
     public void SetTogleFieldsToArry(string vagName)
     {
         string[] vagNames = vagName.Split('#');
+        fullVagPathName = vagName;
         nameVag = vagNames[1]; Debug.Log(vagName + " ADgd: ");
         for (int i = 0; i < PoezdItems.Count; i++)
         {
@@ -102,10 +103,23 @@ public class VagonSelector : MonoBehaviour
 
     }
     // функции отвечающие за применение булеонов к спискам
-    public void FillListScepka(string vagName)
+    public void FillListScepkaA(string vagName)
     {
-        PoezdItems[vagIndexList].GazorezkaEnablebool = GazorezkaEnable.isOn;
-        PoezdItems[vagIndexList].NeZazatobool = NeZazato.isOn;
+        string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T2 " + vagNames[2]);
+        if (vagNames[2] == "Telezka2")
+        {
+            PoezdItems[vagIndexList].GazorezkaEnablebool = GazorezkaEnable.isOn;
+            PoezdItems[vagIndexList].NeZazatobool = NeZazato.isOn;
+        }
+    }
+    public void FillListScepkaB(string vagName)
+    {
+        string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T2 " + vagNames[2]);
+        if (vagNames[2] == "Telezka2")
+        {
+            PoezdItems[vagIndexList].GazorezkaEnablebool = GazorezkaEnable.isOn;
+            PoezdItems[vagIndexList].NeZazatobool = NeZazato.isOn;
+        }
     }
     public void FillListPlatform(string vagName)
     {
@@ -118,23 +132,27 @@ public class VagonSelector : MonoBehaviour
     }
     public void FillTelezka1(string vagName) // номер тележки 1 или 2
     {
-
-          PoezdItems[vagIndexList].TelezkaMezduputAbool1 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
-          PoezdItems[vagIndexList].TelezkaKuvetAbool1 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
-          PoezdItems[vagIndexList].TelezkaMezduputBbool1 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
-          PoezdItems[vagIndexList].TelezkaKuvetBbool1 = TelezkaKuvetB.isOn; //Сход больше 50 см  в сторону обочины 
-          PoezdItems[vagIndexList].UnderVagonbool1 = UnderVagon.isOn;  //под вагоном 
-          PoezdItems[vagIndexList].NearTheWagonbool1 = NearTheWagon.isOn; //около вагона
-          PoezdItems[vagIndexList].OutsideRailsbool1 = OutsideRails.isOn; //Вне пути
-          PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 = NakatnoeOborudovanie.isOn; //Накаточное оборудование
-          PoezdItems[vagIndexList].GidroOborudovaniebool1 = GidroOborudovanie.isOn; //Гидравлическое оборудование
-          PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn;  //поднять целиком
-          PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; //поднять за одну сторону
-          PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
-          PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn;  //Уборка за габарит пути
+        string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T1 " + vagNames[2]);
+        if (vagNames[2] == "Telezka1") { 
+        PoezdItems[vagIndexList].TelezkaMezduputAbool1 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
+        PoezdItems[vagIndexList].TelezkaKuvetAbool1 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
+        PoezdItems[vagIndexList].TelezkaMezduputBbool1 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
+        PoezdItems[vagIndexList].TelezkaKuvetBbool1 = TelezkaKuvetB.isOn; //Сход больше 50 см  в сторону обочины 
+        PoezdItems[vagIndexList].UnderVagonbool1 = UnderVagon.isOn;  //под вагоном 
+        PoezdItems[vagIndexList].NearTheWagonbool1 = NearTheWagon.isOn; //около вагона
+        PoezdItems[vagIndexList].OutsideRailsbool1 = OutsideRails.isOn; //Вне пути
+        PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 = NakatnoeOborudovanie.isOn; //Накаточное оборудование
+        PoezdItems[vagIndexList].GidroOborudovaniebool1 = GidroOborudovanie.isOn; //Гидравлическое оборудование
+        PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn;  //поднять целиком
+        PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; //поднять за одну сторону
+        PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
+        PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn;  //Уборка за габарит пути
+        }
     }
     public void FillTelezka2(string vagName) // номер тележки 1 или 2
     {
+        string[] vagNames = fullVagPathName.Split('#');  Debug.Log("T2 " + vagNames[2]);
+        if (vagNames[2] == "Telezka2") {
         PoezdItems[vagIndexList].TelezkaMezduputAbool2 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
         PoezdItems[vagIndexList].TelezkaKuvetAbool2 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
         PoezdItems[vagIndexList].TelezkaMezduputBbool2 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
@@ -148,6 +166,7 @@ public class VagonSelector : MonoBehaviour
         PoezdItems[vagIndexList].LiftoneSidebool2 = LiftoneSide.isOn; //поднять за одну сторону
         PoezdItems[vagIndexList].UnloadCargebool2 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
         PoezdItems[vagIndexList].OutToOveralSizebool2 = OutToOveralSize.isOn;  //Уборка за габарит пути
+        }
     }
     public List<VagonItem> PoezdItems = new List<VagonItem>();
     [System.Serializable]

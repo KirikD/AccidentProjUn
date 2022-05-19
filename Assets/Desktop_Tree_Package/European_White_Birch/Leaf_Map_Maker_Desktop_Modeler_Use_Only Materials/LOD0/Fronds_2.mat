@@ -39,10 +39,16 @@ Material:
     m_Floats:
     - _Cull: 0
     - _Cutoff: 0.33
+    - _ShadowStrength: 1
     - _Shininess: 0.125
+    - _SquashAmount: 1
+    - _TranslucencyViewDependency: 0.7
     - _WindQuality: 4
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _TranslucencyColor: {r: 0.73, g: 0.85, b: 0.40999997, a: 1}
+    - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
