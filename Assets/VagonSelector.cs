@@ -71,7 +71,7 @@ public class VagonSelector : MonoBehaviour
         ElementSetter.OnSelectedEvent += SetTogleFieldsToArry;
     }
 
-    // Update is called once per frame
+    int vagIndexList;
     public void SetTogleFieldsToArry(string vagName)
     {
         string[] vagNames = vagName.Split('#');
@@ -79,15 +79,75 @@ public class VagonSelector : MonoBehaviour
         for (int i = 0; i < PoezdItems.Count; i++)
         {
             if (PoezdItems[i].name == vagNames[1])
-            {  // реализуем тут присвоение состояний тоглов при нажатии кнопки применить на интерфейсе
+            {    vagIndexList = i;// реализуем тут присвоение состояний тоглов при нажатии кнопки применить на интерфейсе
                  Debug.Log("PoezdItems: " + PoezdItems[i].name + i);
                 if (vagNames[2] == "Scepka1")
-                { ScepkaPanel.SetActive(true); }
+                {
+                    ScepkaPanel.SetActive(true); 
+                }
                 if (vagNames[2] == "Platform")
-                { UborkaPanel.SetActive(true); }
-
+                { 
+                    UborkaPanel.SetActive(true); 
+                }
+                if (vagNames[2] == "Telezka1")
+                {
+                    TelezkaPanel.SetActive(true);
+                }
+                if (vagNames[2] == "Telezka2")
+                {
+                    TelezkaPanel.SetActive(true);
+                }
             }  
         }
+
+    }
+    // функции отвечающие за применение булеонов к спискам
+    public void FillListScepka(string vagName)
+    {
+        PoezdItems[vagIndexList].GazorezkaEnablebool = GazorezkaEnable.isOn;
+        PoezdItems[vagIndexList].NeZazatobool = NeZazato.isOn;
+    }
+    public void FillListPlatform(string vagName)
+    {
+        PoezdItems[vagIndexList].DestroedRailbools = DestroedRails.isOn;
+        PoezdItems[vagIndexList].BoundsPathCorruptbool = BoundsPathCorrupt.isOn;
+        PoezdItems[vagIndexList].FailsCargebool = FailsCarge.isOn;
+        PoezdItems[vagIndexList].AngleVagonToKuvetbool = AngleVagonToKuvet.isOn;
+        PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.isOn;
+        PoezdItems[vagIndexList].VagonOnLeftSidebool = VagonOnLeftSide.isOn;
+    }
+    public void FillTelezka1(string vagName) // номер тележки 1 или 2
+    {
+
+          PoezdItems[vagIndexList].TelezkaMezduputAbool1 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
+          PoezdItems[vagIndexList].TelezkaKuvetAbool1 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
+          PoezdItems[vagIndexList].TelezkaMezduputBbool1 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
+          PoezdItems[vagIndexList].TelezkaKuvetBbool1 = TelezkaKuvetB.isOn; //Сход больше 50 см  в сторону обочины 
+          PoezdItems[vagIndexList].UnderVagonbool1 = UnderVagon.isOn;  //под вагоном 
+          PoezdItems[vagIndexList].NearTheWagonbool1 = NearTheWagon.isOn; //около вагона
+          PoezdItems[vagIndexList].OutsideRailsbool1 = OutsideRails.isOn; //Вне пути
+          PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 = NakatnoeOborudovanie.isOn; //Накаточное оборудование
+          PoezdItems[vagIndexList].GidroOborudovaniebool1 = GidroOborudovanie.isOn; //Гидравлическое оборудование
+          PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn;  //поднять целиком
+          PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; //поднять за одну сторону
+          PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
+          PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn;  //Уборка за габарит пути
+    }
+    public void FillTelezka2(string vagName) // номер тележки 1 или 2
+    {
+        PoezdItems[vagIndexList].TelezkaMezduputAbool2 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
+        PoezdItems[vagIndexList].TelezkaKuvetAbool2 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
+        PoezdItems[vagIndexList].TelezkaMezduputBbool2 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
+        PoezdItems[vagIndexList].TelezkaKuvetBbool2 = TelezkaKuvetB.isOn; //Сход больше 50 см  в сторону обочины 
+        PoezdItems[vagIndexList].UnderVagonbool2 = UnderVagon.isOn;  //под вагоном 
+        PoezdItems[vagIndexList].NearTheWagonbool2 = NearTheWagon.isOn; //около вагона
+        PoezdItems[vagIndexList].OutsideRailsbool2 = OutsideRails.isOn; //Вне пути
+        PoezdItems[vagIndexList].NakatnoeOborudovaniebool2 = NakatnoeOborudovanie.isOn; //Накаточное оборудование
+        PoezdItems[vagIndexList].GidroOborudovaniebool2 = GidroOborudovanie.isOn; //Гидравлическое оборудование
+        PoezdItems[vagIndexList].LiftTheVagonbool2 = LiftTheVagon.isOn;  //поднять целиком
+        PoezdItems[vagIndexList].LiftoneSidebool2 = LiftoneSide.isOn; //поднять за одну сторону
+        PoezdItems[vagIndexList].UnloadCargebool2 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
+        PoezdItems[vagIndexList].OutToOveralSizebool2 = OutToOveralSize.isOn;  //Уборка за габарит пути
     }
     public List<VagonItem> PoezdItems = new List<VagonItem>();
     [System.Serializable]
@@ -95,39 +155,73 @@ public class VagonSelector : MonoBehaviour
     {
         [Header("ВАГОН Номер")]
         public string name; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы       
+        //1
+        [Header("Сход меньше 50 см 1")]
+        [Tooltip("Сход меньше 50 см  в сторону междупутья 1")]
+        public bool TelezkaMezduputAbool1;  //Сход меньше 50 см  в сторону междупутья
+        [Tooltip("Сход меньше 50 см  в сторону обочины 1")]
+        public bool TelezkaKuvetAbool1;  //Сход меньше 50 см  в сторону обочины 
+        [Header("больше 50 см 1")]
+        [Tooltip("Сход меньше 50 см  в сторону междупутья 1")]
+        public bool TelezkaMezduputBbool1;  //Сход больше 50 см  в сторону междупутья
+        [Tooltip("Сход больше 50 см  в сторону обочины 1")]
+        public bool TelezkaKuvetBbool1; //Сход больше 50 см  в сторону обочины 
+        [Header("Разрушена 1")]
+        [Tooltip("под вагоном 1")]
+        public bool UnderVagonbool1;  //под вагоном 
+        [Tooltip("около вагона 1")]
+        public bool NearTheWagonbool1; //около вагона
+        [Tooltip("Вне пути 1")]
+        public bool OutsideRailsbool1; //Вне пути
+        [Header("СРЕДСТВО ПОДЪЕМА 1")]
+        [Tooltip("Вне пути 1")]
+        public bool NakatnoeOborudovaniebool1; //Накаточное оборудование
+        [Tooltip("Вне пути 1")]
+        public bool GidroOborudovaniebool1; //Гидравлическое оборудование
+        [Header("Грузоподъемный кран 1")]
+        [Tooltip("поднять целиком 1")]
+        public bool LiftTheVagonbool1;  //поднять целиком
+        [Tooltip("поднять за одну сторону 1")]
+        public bool LiftoneSidebool1; //поднять за одну сторону
+        [Tooltip("выгрузить груз и поднять целиком 1")]
+        public bool UnloadCargebool1; //выгрузить груз и поднять целиком
+        [Header("Уборка за габарит пути 1")]
+        [Tooltip("Уборка за габарит пути 1")]
+        public bool OutToOveralSizebool1;  //Уборка за габарит пути
+                                           //2
+        [Header("Сход меньше 50 см 2")]
+        [Tooltip("Сход меньше 50 см  в сторону междупутья 2")]
+        public bool TelezkaMezduputAbool2;  //Сход меньше 50 см  в сторону междупутья
+        [Tooltip("Сход меньше 50 см  в сторону обочины 2")]
+        public bool TelezkaKuvetAbool2;  //Сход меньше 50 см  в сторону обочины 
+        [Header("больше 50 см 2")]
+        [Tooltip("Сход меньше 50 см  в сторону междупутья 2")]
+        public bool TelezkaMezduputBbool2;  //Сход больше 50 см  в сторону междупутья
+        [Tooltip("Сход больше 50 см  в сторону обочины 2")]
+        public bool TelezkaKuvetBbool2; //Сход больше 50 см  в сторону обочины 
+        [Header("Разрушена 2")]
+        [Tooltip("под вагоном 2")]
+        public bool UnderVagonbool2;  //под вагоном 
+        [Tooltip("около вагона 2")]
+        public bool NearTheWagonbool2; //около вагона
+        [Tooltip("Вне пути 2")]
+        public bool OutsideRailsbool2; //Вне пути
+        [Header("СРЕДСТВО ПОДЪЕМА 2")]
+        [Tooltip("Вне пути 2")]
+        public bool NakatnoeOborudovaniebool2; //Накаточное оборудование
+        [Tooltip("Вне пути 2")]
+        public bool GidroOborudovaniebool2; //Гидравлическое оборудование
+        [Header("Грузоподъемный кран 2")]
+        [Tooltip("поднять целиком 2")]
+        public bool LiftTheVagonbool2;  //поднять целиком
+        [Tooltip("поднять за одну сторону 2")]
+        public bool LiftoneSidebool2; //поднять за одну сторону
+        [Tooltip("выгрузить груз и поднять целиком 2")]
+        public bool UnloadCargebool2; //выгрузить груз и поднять целиком
+        [Header("Уборка за габарит пути 2")]
+        [Tooltip("Уборка за габарит пути 2")]
+        public bool OutToOveralSizebool2;  //Уборка за габарит пути
 
-        [Header("Сход меньше 50 см ")]
-        [Tooltip("Сход меньше 50 см  в сторону междупутья")]
-        public bool TelezkaMezduputAbool;  //Сход меньше 50 см  в сторону междупутья
-        [Tooltip("Сход меньше 50 см  в сторону обочины ")]
-        public bool TelezkaKuvetAbool;  //Сход меньше 50 см  в сторону обочины 
-        [Header("больше 50 см")]
-        [Tooltip("Сход меньше 50 см  в сторону междупутья")]
-        public bool TelezkaMezduputBbool;  //Сход больше 50 см  в сторону междупутья
-        [Tooltip("Сход больше 50 см  в сторону обочины ")]
-        public bool TelezkaKuvetBbool; //Сход больше 50 см  в сторону обочины 
-        [Header("Разрушена")]
-        [Tooltip("под вагоном ")]
-        public bool UnderVagonbool;  //под вагоном 
-        [Tooltip("около вагона")]
-        public bool NearTheWagonbool; //около вагона
-        [Tooltip("Вне пути")]
-        public bool OutsideRailsbool; //Вне пути
-        [Header("СРЕДСТВО ПОДЪЕМА")]
-        [Tooltip("Вне пути")]
-        public bool NakatnoeOborudovaniebool; //Накаточное оборудование
-        [Tooltip("Вне пути")]
-        public bool GidroOborudovaniebool; //Гидравлическое оборудование
-        [Header("Грузоподъемный кран")]
-        [Tooltip("поднять целиком")]
-        public bool LiftTheVagonbool;  //поднять целиком
-        [Tooltip("поднять за одну сторону")]
-        public bool LiftoneSidebool; //поднять за одну сторону
-        [Tooltip("выгрузить груз и поднять целиком")]
-        public bool UnloadCargebool; //выгрузить груз и поднять целиком
-        [Header("Уборка за габарит пути")]
-        [Tooltip("Уборка за габарит пути")]
-        public bool OutToOveralSizebool;  //Уборка за габарит пути
         [Header("Путь и наклон")]
         [Tooltip("Путь разрушен")]
         public bool DestroedRailbools;  //Путь разрушен
