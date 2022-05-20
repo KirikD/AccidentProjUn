@@ -369,5 +369,3 @@ public class VagonSelector : MonoBehaviour
         public string ScepInfo1 = " И № "; public string ScepInfo2 = " И № "; // название ближайших  вагонов между сцепкой
     }
 }
-
-  
