@@ -24,10 +24,10 @@ public class MaterialChangerLaserPointer : MonoBehaviour
     public UnityEvent PressedFuncs;
     public UnityEvent HoveredEndFuncs;
     Material Normal;
-  
-     Material Hovered;
-     Material Pressed;
-     Material dragged;
+
+    Material Hovered;
+    Material Pressed;
+    Material dragged;
 
     [Obsolete("Use hovered instead")]
     public Material Heightlight { get { return Hovered; } set { Hovered = value; } }
@@ -57,11 +57,11 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             currWidth = new float[s_rederers.Count];
             for (int i = s_rederers.Count - 1; i >= 0; --i)
             {
-                    currWidth[i] = s_rederers[i].material.GetFloat("_ASEOutlineWidth");
+                currWidth[i] = s_rederers[i].material.GetFloat("_ASEOutlineWidth");
             }
         }
 
-                StartsFuncs?.Invoke();
+        StartsFuncs?.Invoke();
         UpdateMaterialState();
     }
 
@@ -137,22 +137,22 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         else if (presses.Count > 0)
         {
             // targetMat = Pressed; 
-            
+
             //Hold = !Hold;
-           
-            if (once) 
-            { 
+
+            if (once)
+            {
                 once = false; Hold = Hold ? false : true;
                 SetChildRendererCol(Color.red, Color.red, 2);
                 PressedFuncs?.Invoke();
             }
-            
+
         }
         else if (hovers.Count > 0)
         {
             once = true; onceB = true;
             // targetMat = Hovered; 
-           
+
             SetChildRendererCol(Color.yellow, Color.green, 1);
             HoveredFuncs?.Invoke();
         }
@@ -160,19 +160,38 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         {
             if (onceB)
             {
-                
+
                 onceB = false;
-                if (SelectedHold) { if (Hold) { OutlCol = Color.red; w = 3; } else { OutlCol = Color.black; w = -0.01f; } }
+                if (SelectedHold) 
+                { 
+                    if (Hold) {
+                        OutlCol = Color.red; w = 3;
+                        disableColiders();
+                    }
+                    else
+                    {
+                        OutlCol = Color.black; w = -0.01f; 
+                    }
+                }
                 SetChildRendererCol(Color.white, OutlCol, w);
                 HoveredEndFuncs?.Invoke();
             }
         }
 
-       /* if (ChangeProp.Set(ref currentMat, targetMat))
-        {
-            SetChildRendererMaterial(targetMat);
-        }*/
+        /* if (ChangeProp.Set(ref currentMat, targetMat))
+         {
+             SetChildRendererMaterial(targetMat);
+         }*/
     }
+    void disableColiders() // отключим все коллайдеры
+    {
+        MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();
+        foreach (MeshCollider body in bodies)
+        {
+            body.enabled = false;
+        }
+    }
+
     private void SetChildRendererCol(Color targetCol, Color outlColor, float width)
     {
         GetComponentsInChildren(true, s_rederers);

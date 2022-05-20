@@ -126,7 +126,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ASEOutlineWidth: 0.005
+    - _ASEOutlineWidth: 0.001
     - _Bias: 0.61
     - _CoverageAmount1: 0
     - _CoverageFalloff1: 5
@@ -153,7 +153,7 @@ Material:
     m_Colors:
     - _ASEOutlineColor: {r: 0.023529291, g: 1, b: 0, a: 1}
     - _AlbedoC: {r: 0.32449526, g: 0.5188679, b: 0.31083125, a: 1}
-    - _Color: {r: 0.26274747, g: 0.41509432, b: 0.18209325, a: 1}
+    - _Color: {r: 0.62264144, g: 0.62264144, b: 0.62264144, a: 1}
     - _Color0: {r: 0, g: 0, b: 0, a: 0}
     - _Color1: {r: 1, g: 0, b: 0, a: 0}
     - _MultiplyAlbedo: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}

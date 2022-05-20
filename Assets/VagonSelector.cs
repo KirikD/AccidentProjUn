@@ -62,6 +62,7 @@ public class VagonSelector : MonoBehaviour
     [Tooltip("Не зажато")]
     public Toggle NeZazato;  //Уборка за габарит пути
 
+    public GameObject ToolsButtonPanel;
     public GameObject TelezkaPanel;
     public GameObject UborkaPanel;
     public GameObject ScepkaPanel;
@@ -84,41 +85,47 @@ public class VagonSelector : MonoBehaviour
                  Debug.Log("PoezdItems: " + PoezdItems[i].name + i);
                 if (vagNames[2] == "Scepka1")
                 {
-                    ScepkaPanel.SetActive(true); 
+                    ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                }
+                if (vagNames[2] == "Scepka2")
+                {
+                    ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 }
                 if (vagNames[2] == "Platform")
                 { 
-                    UborkaPanel.SetActive(true); 
+                    UborkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 }
                 if (vagNames[2] == "Telezka1")
                 {
-                    TelezkaPanel.SetActive(true);
+                    TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 }
                 if (vagNames[2] == "Telezka2")
                 {
-                    TelezkaPanel.SetActive(true);
+                    TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 }
             }  
         }
-
     }
+    // включаем нужные экраны для отмечания обжектов
+
+
     // функции отвечающие за применение булеонов к спискам
     public void FillListScepkaA(string vagName)
     {
         string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T2 " + vagNames[2]);
-        if (vagNames[2] == "Telezka2")
+        if (vagNames[2] == "Scepka1")
         {
-            PoezdItems[vagIndexList].GazorezkaEnablebool = GazorezkaEnable.isOn;
-            PoezdItems[vagIndexList].NeZazatobool = NeZazato.isOn;
+            PoezdItems[vagIndexList].GazorezkaEnablebool1 = GazorezkaEnable.isOn;
+            PoezdItems[vagIndexList].NeZazatobool1 = NeZazato.isOn;
         }
     }
     public void FillListScepkaB(string vagName)
     {
         string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T2 " + vagNames[2]);
-        if (vagNames[2] == "Telezka2")
+        if (vagNames[2] == "Scepka2")
         {
-            PoezdItems[vagIndexList].GazorezkaEnablebool = GazorezkaEnable.isOn;
-            PoezdItems[vagIndexList].NeZazatobool = NeZazato.isOn;
+            PoezdItems[vagIndexList].GazorezkaEnablebool2 = GazorezkaEnable.isOn;
+            PoezdItems[vagIndexList].NeZazatobool2 = NeZazato.isOn;
         }
     }
     public void FillListPlatform(string vagName)
@@ -257,10 +264,13 @@ public class VagonSelector : MonoBehaviour
 
         [Header("АВТОСЦЕПКА МЕЖДУ ВАГОНОМ 1-2")]
         [Tooltip("Применить газорезательное оборудование")]
-        public bool GazorezkaEnablebool;  //Уборка за габарит пути
+        public bool GazorezkaEnablebool1;  //Уборка за габарит пути
         [Tooltip("Не зажато")]
-        public bool NeZazatobool;  //Уборка за габарит пути
-
+        public bool NeZazatobool1;  //Уборка за габарит пути
+        [Tooltip("Применить газорезательное оборудование")]
+        public bool GazorezkaEnablebool2;  //Уборка за габарит пути
+        [Tooltip("Не зажато")]
+        public bool NeZazatobool2;  //Уборка за габарит пути
 
     }
 }

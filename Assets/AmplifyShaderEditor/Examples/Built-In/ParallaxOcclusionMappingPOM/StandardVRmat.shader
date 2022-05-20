@@ -10,7 +10,7 @@ Shader "VR/StandardVRmat"
 		_Normal("Normal", 2D) = "bump" {}
 		_Specular("Specular", Range( 0 , 1)) = 0.02
 		_Smoothness("Smoothness", Range( 0 , 1)) = 0.5
-		_AlbedoC("AlbedoC", Color) = (1,1,1,1)
+		_Color("_Color", Color) = (1,1,1,1)
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
 	}
@@ -39,7 +39,7 @@ Shader "VR/StandardVRmat"
 		inline half4 LightingOutline( SurfaceOutput s, half3 lightDir, half atten ) { return half4 ( 0,0,0, s.Alpha); }
 		void outlineSurf( Input i, inout SurfaceOutput o )
 		{
-			o.Emission = _ASEOutlineColor.rgb*4;
+			o.Emission = _ASEOutlineColor.rgb*9;
 			o.Alpha = 1;
 		}
 		ENDCG
@@ -60,7 +60,7 @@ Shader "VR/StandardVRmat"
 		uniform float4 _Normal_ST;
 		uniform sampler2D _TopAlbedo;
 		uniform float4 _TopAlbedo_ST;
-		uniform float4 _AlbedoC;
+		uniform float4 _Color;
 		uniform float _Specular;
 		uniform float _Smoothness;
 
@@ -69,7 +69,7 @@ Shader "VR/StandardVRmat"
 			float2 uv_Normal = i.uv_texcoord * _Normal_ST.xy + _Normal_ST.zw;
 			o.Normal = tex2D( _Normal, uv_Normal ).rgb;
 			float2 uv_TopAlbedo = i.uv_texcoord * _TopAlbedo_ST.xy + _TopAlbedo_ST.zw;
-			o.Albedo = ( tex2D( _TopAlbedo, uv_TopAlbedo ) * _AlbedoC ).rgb;
+			o.Albedo = ( tex2D( _TopAlbedo, uv_TopAlbedo ) * _Color ).rgb;
 			o.Metallic = _Specular;
 			o.Smoothness = _Smoothness;
 			o.Alpha = 1;
@@ -82,11 +82,11 @@ Shader "VR/StandardVRmat"
 }
 /*ASEBEGIN
 Version=18900
-7;6;1906;1013;654.157;756.371;1;True;True
-Node;AmplifyShaderEditor.TexturePropertyNode;56;17.1665,-624.7086;Float;True;Property;_TopAlbedo;Top Albedo;0;0;Create;True;0;0;0;False;0;False;None;1fb3655d0307c7e49ab305a9b764d3d9;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+7;18;1906;1001;654.157;747.371;1;True;True
+Node;AmplifyShaderEditor.TexturePropertyNode;56;-333.8335,-475.7086;Float;True;Property;_TopAlbedo;Top Albedo;0;0;Create;True;0;0;0;False;0;False;None;1fb3655d0307c7e49ab305a9b764d3d9;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.SamplerNode;62;33.32935,-397.2606;Inherit;True;Property;_TextureSample0;Texture Sample 0;8;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.ColorNode;61;352.6103,-363.8001;Inherit;False;Property;_AlbedoC;AlbedoC;5;0;Create;True;0;0;0;False;0;False;1,1,1,1;1,1,1,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TexturePropertyNode;53;-228.8335,-195.7087;Float;True;Property;_Normal;Normal;1;0;Create;True;0;0;0;False;0;False;None;777be7e5491746741ba3981428cc8a15;True;bump;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+Node;AmplifyShaderEditor.ColorNode;61;352.6103,-363.8001;Inherit;False;Property;_Color;_Color;5;0;Create;True;0;0;0;False;0;False;1,1,1,1;1,1,1,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TexturePropertyNode;65;-127.6097,22.64885;Float;True;Property;_Emis;Emis;2;0;Create;True;0;0;0;False;0;False;None;None;True;bump;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RangedFloatNode;57;388.1664,297.2913;Float;False;Property;_Smoothness;Smoothness;4;0;Create;True;0;0;0;False;0;False;0.5;0.5;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;58;388.1664,217.2913;Float;False;Property;_Specular;Specular;3;0;Create;True;0;0;0;False;0;False;0.02;0.02;0;1;0;1;FLOAT;0
@@ -104,4 +104,4 @@ WireConnection;0;1;63;0
 WireConnection;0;3;58;0
 WireConnection;0;4;57;0
 ASEEND*/
-//CHKSM=15CFACE9A871F5CF3A712425F8CE8B8D64D650DD
+//CHKSM=E08290769EEC3582E2134F3EE0F8F3FC4997B1D8

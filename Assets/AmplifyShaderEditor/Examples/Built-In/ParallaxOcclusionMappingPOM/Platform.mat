@@ -126,7 +126,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ASEOutlineWidth: 0.005
+    - _ASEOutlineWidth: 0.001
     - _Bias: 0.61
     - _CoverageAmount1: 0
     - _CoverageFalloff1: 5
