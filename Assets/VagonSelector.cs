@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class VagonSelector : MonoBehaviour
 {  // все данные для одной стороны вагона
     [Header("ВАГОН Номер")]
-    public string nameVag; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы    
-    
+    public string nameVag; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы
+    [Header("Главный заголовок тележки текст")]
+    public Text MainLabelText;// = "ВЫБЕРИТЕ СООТВЕТСТВУЮЩИЕ ПАРАМЕТРЫ ДЛЯ ТЕЛЕЖКИ №1 ВАГОНА №1";
+    public Text PlatformaUI_MainText; //ВАГОН №1
+    public Text MainScepkaText; //АВТОСЦЕПКА МЕЖДУ  ВАГОНОМ 1-2
+
     [Header("Сход меньше 50 см ")]
     [Tooltip("Сход меньше 50 см  в сторону междупутья")]
     public Toggle TelezkaMezduputA;  //Сход меньше 50 см  в сторону междупутья
@@ -40,6 +44,8 @@ public class VagonSelector : MonoBehaviour
     [Header("Уборка за габарит пути")]
     [Tooltip("Уборка за габарит пути")]
     public Toggle OutToOveralSize;  //Уборка за габарит пути
+    [Tooltip("Выбита")]
+    public Toggle Vibita;  //Выбита
 
     [Header("Путь и наклон")]
     [Tooltip("Путь разрушен")]
@@ -72,7 +78,7 @@ public class VagonSelector : MonoBehaviour
         ElementSetter.OnSelectedEvent += SetTogleFieldsToArry;
     }
 
-    int vagIndexList; string fullVagPathName;
+    int vagIndexList; string fullVagPathName; string scepinf;
     public void SetTogleFieldsToArry(string vagName)
     {
         string[] vagNames = vagName.Split('#');
@@ -83,7 +89,9 @@ public class VagonSelector : MonoBehaviour
             if (PoezdItems[i].name == vagNames[1])
             {    vagIndexList = i;// реализуем тут присвоение состояний тоглов при нажатии кнопки применить на интерфейсе
                  Debug.Log("PoezdItems: " + PoezdItems[i].name + i);
-                if (vagNames[2] == "Scepka1")
+                if (vagNames[2] == "Scepka1")  scepinf = PoezdItems[i].ScepInfo1; if (vagNames[2] == "Scepka2") scepinf = PoezdItems[i].ScepInfo2;
+                OpenScreensToFill3Delements(vagNames[2]);
+                /*if (vagNames[2] == "Scepka1")
                 {
                     ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 }
@@ -102,12 +110,85 @@ public class VagonSelector : MonoBehaviour
                 if (vagNames[2] == "Telezka2")
                 {
                     TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
-                }
+                }*/
             }  
         }
     }
     // включаем нужные экраны для отмечания обжектов
+    void OpenScreensToFill3Delements(string ObjName)
+    {
+        switch (ObjName)
+        {
+            case "Scepka1":
 
+                MainScepkaText.text = "АВТОСЦЕПКА МЕЖДУ  ВАГОНОМ №" + scepinf;
+                ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                GazorezkaEnable.isOn = false; NeZazato.isOn = false;
+                print("Why hello there good sir! Let me teach you about Trigonometry!");
+                break;
+            case "Scepka2":
+                MainScepkaText.text = "АВТОСЦЕПКА МЕЖДУ  ВАГОНОМ №" + scepinf;
+                ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                GazorezkaEnable.isOn = false; NeZazato.isOn = false;
+                print("Hello and good day!");
+                break;
+            case "Platform":
+                    PlatformaUI_MainText.text = "ВАГОН №" + nameVag;
+                    UborkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                    DestroedRails.isOn = false;  //Путь разрушен
+                    BoundsPathCorrupt.isOn = false; //Нарушен габарит по соседнему пути
+                    FailsCarge.isOn = false; //Развал груза
+                    AngleVagonToKuvet.isOn = false;  //Наклон в сторону обочины
+                    AngleVagonToKuvetCenter.isOn = false; //Наклон в сторону междупутья
+                    VagonOnLeftSide.isOn = false; //Вагон на боку
+    print("Whadya want?");
+                break;
+            case "Telezka1":
+                MainLabelText.text = "ВЫБЕРИТЕ СООТВЕТСТВУЮЩИЕ ПАРАМЕТРЫ ДЛЯ ТЕЛЕЖКИ №1 ВАГОНА №" + nameVag;
+                TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                TelezkaMezduputA.isOn = false;  //Сход меньше 50 см  в сторону междупутья
+                TelezkaKuvetA.isOn = false;  //Сход меньше 50 см  в сторону обочины 
+                TelezkaMezduputB.isOn = false;  //Сход больше 50 см  в сторону междупутья
+                TelezkaKuvetB.isOn = false; //Сход больше 50 см  в сторону обочины 
+                UnderVagon.isOn = false;  //под вагоном 
+                NearTheWagon.isOn = false; //около вагона
+                OutsideRails.isOn = false; //Вне пути
+                NakatnoeOborudovanie.isOn = false; //Накаточное оборудование
+                GidroOborudovanie.isOn = false; //Гидравлическое оборудование
+                LiftTheVagon.isOn = false;  //поднять целиком
+                LiftoneSide.isOn = false; //поднять за одну сторону
+                UnloadCarge.isOn = false; //выгрузить груз и поднять целиком
+                OutToOveralSize.isOn = false;  //Уборка за габарит пути
+                Vibita.isOn = false;  //
+                print("Grog SMASH!");
+                break;
+            case "Telezka2":
+                MainLabelText.text = "ВЫБЕРИТЕ СООТВЕТСТВУЮЩИЕ ПАРАМЕТРЫ ДЛЯ ТЕЛЕЖКИ №2 ВАГОНА №" + nameVag;
+                TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                    TelezkaMezduputA.isOn = false;  //Сход меньше 50 см  в сторону междупутья
+                         TelezkaKuvetA.isOn = false;  //Сход меньше 50 см  в сторону обочины 
+          TelezkaMezduputB.isOn = false;  //Сход больше 50 см  в сторону междупутья
+                         TelezkaKuvetB.isOn = false; //Сход больше 50 см  в сторону обочины 
+                     UnderVagon.isOn = false;  //под вагоном 
+                      NearTheWagon.isOn = false; //около вагона
+                OutsideRails.isOn = false; //Вне пути
+                      NakatnoeOborudovanie.isOn = false; //Накаточное оборудование
+              GidroOborudovanie.isOn = false; //Гидравлическое оборудование
+                 LiftTheVagon.isOn = false;  //поднять целиком
+                LiftoneSide.isOn = false; //поднять за одну сторону
+    UnloadCarge.isOn = false; //выгрузить груз и поднять целиком
+             OutToOveralSize.isOn = false;  //Уборка за габарит пути
+                Vibita.isOn = false;  //
+                print("Ulg, glib, Pblblblblb");
+                break;
+            case "addhftrgh":
+                print("dfg");
+                break;
+            default:
+                print("Incorrect intelligence level.");
+                break;
+        }
+    }
 
     // функции отвечающие за применение булеонов к спискам
     public void FillListScepkaA(string vagName)
@@ -129,7 +210,7 @@ public class VagonSelector : MonoBehaviour
         }
     }
     public void FillListPlatform(string vagName)
-    {
+    {   
         PoezdItems[vagIndexList].DestroedRailbools = DestroedRails.isOn;
         PoezdItems[vagIndexList].BoundsPathCorruptbool = BoundsPathCorrupt.isOn;
         PoezdItems[vagIndexList].FailsCargebool = FailsCarge.isOn;
@@ -153,7 +234,8 @@ public class VagonSelector : MonoBehaviour
         PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn;  //поднять целиком
         PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; //поднять за одну сторону
         PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
-        PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn;  //Уборка за габарит пути
+        PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn;  //Уборка за габарит пути Vibita
+            PoezdItems[vagIndexList].Vibitabool1 = Vibita.isOn;
         }
     }
     public void FillTelezka2(string vagName) // номер тележки 1 или 2
@@ -173,14 +255,25 @@ public class VagonSelector : MonoBehaviour
         PoezdItems[vagIndexList].LiftoneSidebool2 = LiftoneSide.isOn; //поднять за одну сторону
         PoezdItems[vagIndexList].UnloadCargebool2 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
         PoezdItems[vagIndexList].OutToOveralSizebool2 = OutToOveralSize.isOn;  //Уборка за габарит пути
+        PoezdItems[vagIndexList].Vibitabool2 = Vibita.isOn;
         }
     }
-    public List<VagonItem> PoezdItems = new List<VagonItem>();
+    public void BaseChecingOperation()
+    {
+        for (int i = 0; i < IdealBaseItems.Count; i++)
+        {// проверяем всю базу
+        
+        }
+    }
+    public List<VagonItem> PoezdItems = new List<VagonItem>(); // база того что мы отмечаем и где
+    public List<VagonItem> IdealBaseItems = new List<VagonItem>();// Идеальная база с правильными ответами
     [System.Serializable]
     public class VagonItem
     {
         [Header("ВАГОН Номер")]
-        public string name; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы       
+        public string name; //Имя вагона и номер по нему мы заполняем нужный элемент таблицы
+        [Tooltip("реальный номер вагона в составе")]
+        public int VagIndex ;//
         //1
         [Header("Сход меньше 50 см 1")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья 1")]
@@ -214,6 +307,7 @@ public class VagonSelector : MonoBehaviour
         [Header("Уборка за габарит пути 1")]
         [Tooltip("Уборка за габарит пути 1")]
         public bool OutToOveralSizebool1;  //Уборка за габарит пути
+        public bool Vibitabool1;
                                            //2
         [Header("Сход меньше 50 см 2")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья 2")]
@@ -247,6 +341,7 @@ public class VagonSelector : MonoBehaviour
         [Header("Уборка за габарит пути 2")]
         [Tooltip("Уборка за габарит пути 2")]
         public bool OutToOveralSizebool2;  //Уборка за габарит пути
+        public bool Vibitabool2;
 
         [Header("Путь и наклон")]
         [Tooltip("Путь разрушен")]
@@ -271,7 +366,7 @@ public class VagonSelector : MonoBehaviour
         public bool GazorezkaEnablebool2;  //Уборка за габарит пути
         [Tooltip("Не зажато")]
         public bool NeZazatobool2;  //Уборка за габарит пути
-
+        public string ScepInfo1 = " И № "; public string ScepInfo2 = " И № "; // название ближайших  вагонов между сцепкой
     }
 }
 
