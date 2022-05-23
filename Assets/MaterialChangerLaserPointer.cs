@@ -166,7 +166,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
                 { 
                     if (Hold) {
                         OutlCol = Color.red; w = 3;
-                        disableColiders();
+                        disableColiders(false); Invoke("EnabColiders",5);
                     }
                     else
                     {
@@ -183,15 +183,16 @@ public class MaterialChangerLaserPointer : MonoBehaviour
              SetChildRendererMaterial(targetMat);
          }*/
     }
-    void disableColiders() // отключим все коллайдеры
+    void disableColiders(bool isOn) // отключим все коллайдеры
     {
         MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();
         foreach (MeshCollider body in bodies)
         {
-            body.enabled = false;
+            body.enabled = isOn;
         }
     }
-
+    void EnabColiders() // включем все коллайдеры
+    { disableColiders(true); }
     private void SetChildRendererCol(Color targetCol, Color outlColor, float width)
     {
         GetComponentsInChildren(true, s_rederers);

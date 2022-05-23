@@ -10,7 +10,7 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     private Dictionary<int, GameObject> m_DraggingIcons = new Dictionary<int, GameObject>();
     private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform>();
-
+    public GameObject InsideContentA, InsideContentB;
     public void OnBeginDrag(PointerEventData eventData)
     {
         var canvas = transform.parent == null ? null : transform.parent.GetComponentInParent<Canvas>();
@@ -59,8 +59,9 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             // When raycast hit something, place the dragged image at the hit position
             // Notice that if raycast performed by GraphicRaycaster module, worldNormal is not assigned (see GraphicRaycaster for more detail)
-            rectTransform.position = raycastResult.worldPosition + raycastResult.worldNormal * 0.01f; // add a little distance to avoid z-fighting
+            rectTransform.position = raycastResult.worldPosition + raycastResult.worldNormal * 0.001f; // add a little distance to avoid z-fighting
             rectTransform.rotation = Quaternion.LookRotation(raycastResult.worldNormal, raycastResult.gameObject.transform.up);
+           // rectTransform.localEulerAngles = Vector3.zero;
         }
         else
         {
@@ -82,14 +83,29 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             }
         }
     }
-
+    GameObject ClonedIco;
     public void OnEndDrag(PointerEventData eventData)
     {
         if (m_DraggingIcons[eventData.pointerId] != null)
         {
-            Destroy(m_DraggingIcons[eventData.pointerId]);
+            ClonedIco = m_DraggingIcons[eventData.pointerId];
+            ClonedIco.transform.localEulerAngles = Vector3.zero;
+            ClonedIco.layer = 5; // Пятый слой где UI чтобы оно было интерактивно
+            Destroy(m_DraggingIcons[eventData.pointerId].GetComponent<CanvasGroup>());
+            // Destroy(m_DraggingIcons[eventData.pointerId]);
+            Invoke(nameof(MyFuncAddBittonsInside),1);
         }
 
         m_DraggingIcons[eventData.pointerId] = null;
     }
+    void MyFuncAddBittonsInside() 
+    {
+        //////////
+        GameObject G1 = Instantiate(InsideContentA);
+        G1.transform.SetParent(ClonedIco.transform, false);
+        GameObject G2 = Instantiate(InsideContentB);
+        G2.transform.SetParent(ClonedIco.transform, false);
+        ///////////
+    }
+
 }
