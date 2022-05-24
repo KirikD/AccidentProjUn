@@ -61,7 +61,8 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             // Notice that if raycast performed by GraphicRaycaster module, worldNormal is not assigned (see GraphicRaycaster for more detail)
             rectTransform.position = raycastResult.worldPosition + raycastResult.worldNormal * 0.001f; // add a little distance to avoid z-fighting
             rectTransform.rotation = Quaternion.LookRotation(raycastResult.worldNormal, raycastResult.gameObject.transform.up);
-           // rectTransform.localEulerAngles = Vector3.zero;
+            // rectTransform.localEulerAngles = Vector3.zero;
+            rectTransform.localScale = Vector3.one*0.7f;
         }
         else
         {
