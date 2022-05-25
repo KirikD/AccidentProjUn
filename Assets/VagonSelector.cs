@@ -60,7 +60,8 @@ public class VagonSelector : MonoBehaviour
     public Toggle AngleVagonToKuvetCenter; //Наклон в сторону междупутья
     [Tooltip("Вагон на боку")]
     public Toggle VagonOnLeftSide; //Вагон на боку
-
+    [Tooltip("Доп пункт разрушенный путь")]
+    public Toggle CorruptRails; public Toggle NoCorruptRails; //Вагон на боку
 
     [Header("АВТОСЦЕПКА МЕЖДУ ВАГОНОМ 1-2")]
     [Tooltip("Применить газорезательное оборудование")]
@@ -70,6 +71,7 @@ public class VagonSelector : MonoBehaviour
 
     public GameObject ToolsButtonPanel;
     public GameObject TelezkaPanel;
+    public GameObject PathPanel;
     public GameObject UborkaPanel;
     public GameObject ScepkaPanel;
     UnityEvent ElementSetter_MyEvent; //  ElementSetter_MyEvent.Invoke();
@@ -120,7 +122,6 @@ public class VagonSelector : MonoBehaviour
         switch (ObjName)
         {
             case "Scepka1":
-
                 MainScepkaText.text = "АВТОСЦЕПКА МЕЖДУ  ВАГОНОМ №" + scepinf;
                 ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 GazorezkaEnable.isOn = false; NeZazato.isOn = false;
@@ -181,11 +182,14 @@ public class VagonSelector : MonoBehaviour
                 Vibita.isOn = false;  //
                 print("Ulg, glib, Pblblblblb");
                 break;
-            case "addhftrgh":
+            case "RailSeg": //RailPath
+                PathPanel.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Путь поврежден между №" + scepinf;
+                PathPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
+                CorruptRails.isOn = false; NoCorruptRails.isOn = false;
                 print("dfg");
                 break;
             default:
-                print("Incorrect intelligence level.");
+                //print("Incorrect intelligence level.");
                 break;
         }
     }
@@ -196,8 +200,8 @@ public class VagonSelector : MonoBehaviour
         string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T2 " + vagNames[2]);
         if (vagNames[2] == "Scepka1")
         {
-            PoezdItems[vagIndexList].GazorezkaEnablebool1 = GazorezkaEnable.isOn;
-            PoezdItems[vagIndexList].NeZazatobool1 = NeZazato.isOn;
+            PoezdItems[vagIndexList].GazorezkaEnablebool1 = GazorezkaEnable.isOn; PoezdItems[vagIndexList].sGazorezkaEnablebool1 = GazorezkaEnable.transform.GetChild(1).GetComponent<Text>().text;
+            PoezdItems[vagIndexList].NeZazatobool1 = NeZazato.isOn; PoezdItems[vagIndexList].sNeZazatobool1 = NeZazato.transform.GetChild(1).GetComponent<Text>().text;
         }
     }
     public void FillListScepkaB(string vagName)
@@ -205,57 +209,59 @@ public class VagonSelector : MonoBehaviour
         string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T2 " + vagNames[2]);
         if (vagNames[2] == "Scepka2")
         {
-            PoezdItems[vagIndexList].GazorezkaEnablebool2 = GazorezkaEnable.isOn;
-            PoezdItems[vagIndexList].NeZazatobool2 = NeZazato.isOn;
-        }
+            PoezdItems[vagIndexList].GazorezkaEnablebool2 = GazorezkaEnable.isOn; PoezdItems[vagIndexList].sGazorezkaEnablebool2 = GazorezkaEnable.transform.GetChild(1).GetComponent<Text>().text;
+            PoezdItems[vagIndexList].NeZazatobool2 = NeZazato.isOn; PoezdItems[vagIndexList].sNeZazatobool2 = NeZazato.transform.GetChild(1).GetComponent<Text>().text;
+        } 
     }
     public void FillListPlatform(string vagName)
     {   
-        PoezdItems[vagIndexList].DestroedRailbools = DestroedRails.isOn;
-        PoezdItems[vagIndexList].BoundsPathCorruptbool = BoundsPathCorrupt.isOn;
-        PoezdItems[vagIndexList].FailsCargebool = FailsCarge.isOn;
-        PoezdItems[vagIndexList].AngleVagonToKuvetbool = AngleVagonToKuvet.isOn;
-        PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.isOn;
-        PoezdItems[vagIndexList].VagonOnLeftSidebool = VagonOnLeftSide.isOn;
+        PoezdItems[vagIndexList].DestroedRailbools = DestroedRails.isOn; PoezdItems[vagIndexList].sDestroedRailbools = DestroedRails.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].BoundsPathCorruptbool = BoundsPathCorrupt.isOn; PoezdItems[vagIndexList].sBoundsPathCorruptbool = BoundsPathCorrupt.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].FailsCargebool = FailsCarge.isOn; PoezdItems[vagIndexList].sFailsCargebool = FailsCarge.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].AngleVagonToKuvetbool = AngleVagonToKuvet.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetbool = AngleVagonToKuvet.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].VagonOnLeftSidebool = VagonOnLeftSide.isOn; PoezdItems[vagIndexList].sVagonOnLeftSidebool = VagonOnLeftSide.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].CorruptedPathbool = CorruptRails.isOn; PoezdItems[vagIndexList].sCorruptedPathbool = CorruptRails.transform.GetChild(1).GetComponent<Text>().text;
+        PoezdItems[vagIndexList].NoCorruptedPathbool = NoCorruptRails.isOn; PoezdItems[vagIndexList].sNoCorruptedPathbool = NoCorruptRails.transform.GetChild(1).GetComponent<Text>().text;
     }
     public void FillTelezka1(string vagName) // номер тележки 1 или 2
     {
         string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T1 " + vagNames[2]);
         if (vagNames[2] == "Telezka1") { 
-        PoezdItems[vagIndexList].TelezkaMezduputAbool1 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
-        PoezdItems[vagIndexList].TelezkaKuvetAbool1 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
-        PoezdItems[vagIndexList].TelezkaMezduputBbool1 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
-        PoezdItems[vagIndexList].TelezkaKuvetBbool1 = TelezkaKuvetB.isOn; //Сход больше 50 см  в сторону обочины 
-        PoezdItems[vagIndexList].UnderVagonbool1 = UnderVagon.isOn;  //под вагоном 
-        PoezdItems[vagIndexList].NearTheWagonbool1 = NearTheWagon.isOn; //около вагона
-        PoezdItems[vagIndexList].OutsideRailsbool1 = OutsideRails.isOn; //Вне пути
-        PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 = NakatnoeOborudovanie.isOn; //Накаточное оборудование
-        PoezdItems[vagIndexList].GidroOborudovaniebool1 = GidroOborudovanie.isOn; //Гидравлическое оборудование
-        PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn;  //поднять целиком
-        PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; //поднять за одну сторону
-        PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
-        PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn;  //Уборка за габарит пути Vibita
-            PoezdItems[vagIndexList].Vibitabool1 = Vibita.isOn;
+            PoezdItems[vagIndexList].TelezkaMezduputAbool1 = TelezkaMezduputA.isOn; PoezdItems[vagIndexList].sTelezkaMezduputAbool1 = TelezkaMezduputA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону междупутья
+            PoezdItems[vagIndexList].TelezkaKuvetAbool1 = TelezkaKuvetA.isOn; PoezdItems[vagIndexList].sTelezkaKuvetAbool1 = TelezkaKuvetA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону обочины 
+            PoezdItems[vagIndexList].TelezkaMezduputBbool1 = TelezkaMezduputB.isOn; PoezdItems[vagIndexList].sTelezkaMezduputBbool1 = TelezkaMezduputB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону междупутья
+            PoezdItems[vagIndexList].TelezkaKuvetBbool1 = TelezkaKuvetB.isOn; PoezdItems[vagIndexList].sTelezkaKuvetBbool1 = TelezkaKuvetB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону обочины 
+            PoezdItems[vagIndexList].UnderVagonbool1 = UnderVagon.isOn; PoezdItems[vagIndexList].sUnderVagonbool1 = UnderVagon.transform.GetChild(1).GetComponent<Text>().text;//под вагоном 
+            PoezdItems[vagIndexList].NearTheWagonbool1 = NearTheWagon.isOn; PoezdItems[vagIndexList].sNearTheWagonbool1 = NearTheWagon.transform.GetChild(1).GetComponent<Text>().text;//около вагона
+            PoezdItems[vagIndexList].OutsideRailsbool1 = OutsideRails.isOn; PoezdItems[vagIndexList].sOutsideRailsbool1 = OutsideRails.transform.GetChild(1).GetComponent<Text>().text;//Вне пути
+            PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 = NakatnoeOborudovanie.isOn; PoezdItems[vagIndexList].sNakatnoeOborudovaniebool1 = NakatnoeOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Накаточное оборудование
+            PoezdItems[vagIndexList].GidroOborudovaniebool1 = GidroOborudovanie.isOn; PoezdItems[vagIndexList].sGidroOborudovaniebool1 = GidroOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Гидравлическое оборудование
+            PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn; PoezdItems[vagIndexList].sLiftTheVagonbool1 = LiftTheVagon.transform.GetChild(1).GetComponent<Text>().text;//поднять целиком
+            PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; PoezdItems[vagIndexList].sLiftoneSidebool1 = LiftoneSide.transform.GetChild(1).GetComponent<Text>().text;//поднять за одну сторону
+            PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; PoezdItems[vagIndexList].sUnloadCargebool1 = UnloadCarge.transform.GetChild(1).GetComponent<Text>().text;//выгрузить груз и поднять целиком
+            PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn; PoezdItems[vagIndexList].sOutToOveralSizebool1 = OutToOveralSize.transform.GetChild(1).GetComponent<Text>().text;//Уборка за габарит пути Vibita
+            PoezdItems[vagIndexList].Vibitabool1 = Vibita.isOn; PoezdItems[vagIndexList].sVibitabool1 = Vibita.transform.GetChild(1).GetComponent<Text>().text;
         }
     }
     public void FillTelezka2(string vagName) // номер тележки 1 или 2
     {
         string[] vagNames = fullVagPathName.Split('#');  Debug.Log("T2 " + vagNames[2]);
         if (vagNames[2] == "Telezka2") {
-        PoezdItems[vagIndexList].TelezkaMezduputAbool2 = TelezkaMezduputA.isOn;  //Сход меньше 50 см  в сторону междупутья
-        PoezdItems[vagIndexList].TelezkaKuvetAbool2 = TelezkaKuvetA.isOn;  //Сход меньше 50 см  в сторону обочины 
-        PoezdItems[vagIndexList].TelezkaMezduputBbool2 = TelezkaMezduputB.isOn;  //Сход больше 50 см  в сторону междупутья
-        PoezdItems[vagIndexList].TelezkaKuvetBbool2 = TelezkaKuvetB.isOn; //Сход больше 50 см  в сторону обочины 
-        PoezdItems[vagIndexList].UnderVagonbool2 = UnderVagon.isOn;  //под вагоном 
-        PoezdItems[vagIndexList].NearTheWagonbool2 = NearTheWagon.isOn; //около вагона
-        PoezdItems[vagIndexList].OutsideRailsbool2 = OutsideRails.isOn; //Вне пути
-        PoezdItems[vagIndexList].NakatnoeOborudovaniebool2 = NakatnoeOborudovanie.isOn; //Накаточное оборудование
-        PoezdItems[vagIndexList].GidroOborudovaniebool2 = GidroOborudovanie.isOn; //Гидравлическое оборудование
-        PoezdItems[vagIndexList].LiftTheVagonbool2 = LiftTheVagon.isOn;  //поднять целиком
-        PoezdItems[vagIndexList].LiftoneSidebool2 = LiftoneSide.isOn; //поднять за одну сторону
-        PoezdItems[vagIndexList].UnloadCargebool2 = UnloadCarge.isOn; //выгрузить груз и поднять целиком
-        PoezdItems[vagIndexList].OutToOveralSizebool2 = OutToOveralSize.isOn;  //Уборка за габарит пути
-        PoezdItems[vagIndexList].Vibitabool2 = Vibita.isOn;
+            PoezdItems[vagIndexList].TelezkaMezduputAbool2 = TelezkaMezduputA.isOn; PoezdItems[vagIndexList].sTelezkaMezduputAbool2 = TelezkaMezduputA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону междупутья
+            PoezdItems[vagIndexList].TelezkaKuvetAbool2 = TelezkaKuvetA.isOn; PoezdItems[vagIndexList].sTelezkaKuvetAbool2 = TelezkaKuvetA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону обочины 
+            PoezdItems[vagIndexList].TelezkaMezduputBbool2 = TelezkaMezduputB.isOn; PoezdItems[vagIndexList].sTelezkaMezduputBbool2 = TelezkaMezduputB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону междупутья
+            PoezdItems[vagIndexList].TelezkaKuvetBbool2 = TelezkaKuvetB.isOn; PoezdItems[vagIndexList].sTelezkaKuvetBbool2 = TelezkaKuvetB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону обочины 
+            PoezdItems[vagIndexList].UnderVagonbool2 = UnderVagon.isOn; PoezdItems[vagIndexList].sUnderVagonbool2 = UnderVagon.transform.GetChild(1).GetComponent<Text>().text;//под вагоном 
+            PoezdItems[vagIndexList].NearTheWagonbool2 = NearTheWagon.isOn; PoezdItems[vagIndexList].sNearTheWagonbool2 = NearTheWagon.transform.GetChild(1).GetComponent<Text>().text;//около вагона
+            PoezdItems[vagIndexList].OutsideRailsbool2 = OutsideRails.isOn; PoezdItems[vagIndexList].sOutsideRailsbool2 = OutsideRails.transform.GetChild(1).GetComponent<Text>().text;//Вне пути
+            PoezdItems[vagIndexList].NakatnoeOborudovaniebool2 = NakatnoeOborudovanie.isOn; PoezdItems[vagIndexList].sNakatnoeOborudovaniebool2 = NakatnoeOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Накаточное оборудование
+            PoezdItems[vagIndexList].GidroOborudovaniebool2 = GidroOborudovanie.isOn; PoezdItems[vagIndexList].sGidroOborudovaniebool2 = GidroOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Гидравлическое оборудование
+            PoezdItems[vagIndexList].LiftTheVagonbool2 = LiftTheVagon.isOn; PoezdItems[vagIndexList].sLiftTheVagonbool2 = LiftTheVagon.transform.GetChild(1).GetComponent<Text>().text;//поднять целиком
+            PoezdItems[vagIndexList].LiftoneSidebool2 = LiftoneSide.isOn; PoezdItems[vagIndexList].sLiftoneSidebool2 = LiftoneSide.transform.GetChild(1).GetComponent<Text>().text;//поднять за одну сторону
+            PoezdItems[vagIndexList].UnloadCargebool2 = UnloadCarge.isOn; PoezdItems[vagIndexList].sUnloadCargebool2 = UnloadCarge.transform.GetChild(1).GetComponent<Text>().text;//выгрузить груз и поднять целиком
+            PoezdItems[vagIndexList].OutToOveralSizebool2 = OutToOveralSize.isOn; PoezdItems[vagIndexList].sOutToOveralSizebool2 = OutToOveralSize.transform.GetChild(1).GetComponent<Text>().text;//Уборка за габарит пути
+            PoezdItems[vagIndexList].Vibitabool2 = Vibita.isOn; PoezdItems[vagIndexList].sVibitabool2 = Vibita.transform.GetChild(1).GetComponent<Text>().text;
         }
     }
     public void BaseChecingOperation()
@@ -277,95 +283,98 @@ public class VagonSelector : MonoBehaviour
         //1
         [Header("Сход меньше 50 см 1")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья 1")]
-        public bool TelezkaMezduputAbool1;  //Сход меньше 50 см  в сторону междупутья
+        public bool TelezkaMezduputAbool1; public string sTelezkaMezduputAbool1;//Сход меньше 50 см  в сторону междупутья
         [Tooltip("Сход меньше 50 см  в сторону обочины 1")]
-        public bool TelezkaKuvetAbool1;  //Сход меньше 50 см  в сторону обочины 
+        public bool TelezkaKuvetAbool1; public string sTelezkaKuvetAbool1;//Сход меньше 50 см  в сторону обочины 
         [Header("больше 50 см 1")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья 1")]
-        public bool TelezkaMezduputBbool1;  //Сход больше 50 см  в сторону междупутья
+        public bool TelezkaMezduputBbool1; public string sTelezkaMezduputBbool1;//Сход больше 50 см  в сторону междупутья
         [Tooltip("Сход больше 50 см  в сторону обочины 1")]
-        public bool TelezkaKuvetBbool1; //Сход больше 50 см  в сторону обочины 
+        public bool TelezkaKuvetBbool1; public string sTelezkaKuvetBbool1;//Сход больше 50 см  в сторону обочины 
         [Header("Разрушена 1")]
         [Tooltip("под вагоном 1")]
-        public bool UnderVagonbool1;  //под вагоном 
+        public bool UnderVagonbool1; public string sUnderVagonbool1;//под вагоном 
         [Tooltip("около вагона 1")]
-        public bool NearTheWagonbool1; //около вагона
+        public bool NearTheWagonbool1; public string sNearTheWagonbool1;//около вагона
         [Tooltip("Вне пути 1")]
-        public bool OutsideRailsbool1; //Вне пути
+        public bool OutsideRailsbool1; public string sOutsideRailsbool1;//Вне пути
         [Header("СРЕДСТВО ПОДЪЕМА 1")]
         [Tooltip("Вне пути 1")]
-        public bool NakatnoeOborudovaniebool1; //Накаточное оборудование
+        public bool NakatnoeOborudovaniebool1; public string sNakatnoeOborudovaniebool1;//Накаточное оборудование
         [Tooltip("Вне пути 1")]
-        public bool GidroOborudovaniebool1; //Гидравлическое оборудование
+        public bool GidroOborudovaniebool1; public string sGidroOborudovaniebool1;//Гидравлическое оборудование
         [Header("Грузоподъемный кран 1")]
         [Tooltip("поднять целиком 1")]
-        public bool LiftTheVagonbool1;  //поднять целиком
+        public bool LiftTheVagonbool1; public string sLiftTheVagonbool1;//поднять целиком
         [Tooltip("поднять за одну сторону 1")]
-        public bool LiftoneSidebool1; //поднять за одну сторону
+        public bool LiftoneSidebool1; public string sLiftoneSidebool1;//поднять за одну сторону
         [Tooltip("выгрузить груз и поднять целиком 1")]
-        public bool UnloadCargebool1; //выгрузить груз и поднять целиком
+        public bool UnloadCargebool1; public string sUnloadCargebool1;//выгрузить груз и поднять целиком
         [Header("Уборка за габарит пути 1")]
         [Tooltip("Уборка за габарит пути 1")]
-        public bool OutToOveralSizebool1;  //Уборка за габарит пути
-        public bool Vibitabool1;
-                                           //2
+        public bool OutToOveralSizebool1; public string sOutToOveralSizebool1;//Уборка за габарит пути
+        public bool Vibitabool1; public string sVibitabool1;
+        //2
         [Header("Сход меньше 50 см 2")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья 2")]
-        public bool TelezkaMezduputAbool2;  //Сход меньше 50 см  в сторону междупутья
+        public bool TelezkaMezduputAbool2; public string sTelezkaMezduputAbool2;//Сход меньше 50 см  в сторону междупутья
         [Tooltip("Сход меньше 50 см  в сторону обочины 2")]
-        public bool TelezkaKuvetAbool2;  //Сход меньше 50 см  в сторону обочины 
+        public bool TelezkaKuvetAbool2; public string sTelezkaKuvetAbool2;//Сход меньше 50 см  в сторону обочины 
         [Header("больше 50 см 2")]
         [Tooltip("Сход меньше 50 см  в сторону междупутья 2")]
-        public bool TelezkaMezduputBbool2;  //Сход больше 50 см  в сторону междупутья
+        public bool TelezkaMezduputBbool2; public string sTelezkaMezduputBbool2;//Сход больше 50 см  в сторону междупутья
         [Tooltip("Сход больше 50 см  в сторону обочины 2")]
-        public bool TelezkaKuvetBbool2; //Сход больше 50 см  в сторону обочины 
+        public bool TelezkaKuvetBbool2; public string sTelezkaKuvetBbool2;//Сход больше 50 см  в сторону обочины 
         [Header("Разрушена 2")]
         [Tooltip("под вагоном 2")]
-        public bool UnderVagonbool2;  //под вагоном 
+        public bool UnderVagonbool2; public string sUnderVagonbool2;//под вагоном 
         [Tooltip("около вагона 2")]
-        public bool NearTheWagonbool2; //около вагона
+        public bool NearTheWagonbool2; public string sNearTheWagonbool2;//около вагона
         [Tooltip("Вне пути 2")]
-        public bool OutsideRailsbool2; //Вне пути
+        public bool OutsideRailsbool2; public string sOutsideRailsbool2;//Вне пути
         [Header("СРЕДСТВО ПОДЪЕМА 2")]
         [Tooltip("Вне пути 2")]
-        public bool NakatnoeOborudovaniebool2; //Накаточное оборудование
+        public bool NakatnoeOborudovaniebool2; public string sNakatnoeOborudovaniebool2;//Накаточное оборудование
         [Tooltip("Вне пути 2")]
-        public bool GidroOborudovaniebool2; //Гидравлическое оборудование
+        public bool GidroOborudovaniebool2; public string sGidroOborudovaniebool2;//Гидравлическое оборудование
         [Header("Грузоподъемный кран 2")]
         [Tooltip("поднять целиком 2")]
-        public bool LiftTheVagonbool2;  //поднять целиком
+        public bool LiftTheVagonbool2; public string sLiftTheVagonbool2;//поднять целиком
         [Tooltip("поднять за одну сторону 2")]
-        public bool LiftoneSidebool2; //поднять за одну сторону
+        public bool LiftoneSidebool2; public string sLiftoneSidebool2;//поднять за одну сторону
         [Tooltip("выгрузить груз и поднять целиком 2")]
-        public bool UnloadCargebool2; //выгрузить груз и поднять целиком
+        public bool UnloadCargebool2; public string sUnloadCargebool2;//выгрузить груз и поднять целиком
         [Header("Уборка за габарит пути 2")]
         [Tooltip("Уборка за габарит пути 2")]
-        public bool OutToOveralSizebool2;  //Уборка за габарит пути
-        public bool Vibitabool2;
+        public bool OutToOveralSizebool2; public string sOutToOveralSizebool2;//Уборка за габарит пути
+        public bool Vibitabool2; public string sVibitabool2;
 
         [Header("Путь и наклон")]
         [Tooltip("Путь разрушен")]
-        public bool DestroedRailbools;  //Путь разрушен
+        public bool DestroedRailbools; public string sDestroedRailbools;//Путь разрушен
         [Tooltip("Нарушен габарит по соседнему пути")]
-        public bool BoundsPathCorruptbool; //Нарушен габарит по соседнему пути
+        public bool BoundsPathCorruptbool; public string sBoundsPathCorruptbool;//Нарушен габарит по соседнему пути
         [Tooltip("Развал груза")]
-        public bool FailsCargebool; //Развал груза
+        public bool FailsCargebool; public string sFailsCargebool;//Развал груза
         [Tooltip("Наклон в сторону обочины")]
-        public bool AngleVagonToKuvetbool;  //Наклон в сторону обочины
+        public bool AngleVagonToKuvetbool; public string sAngleVagonToKuvetbool;//Наклон в сторону обочины
         [Tooltip("Наклон в сторону междупутья")]
-        public bool AngleVagonToKuvetCenterbool; //Наклон в сторону междупутья
+        public bool AngleVagonToKuvetCenterbool; public string sAngleVagonToKuvetCenterbool;//Наклон в сторону междупутья
         [Tooltip("Вагон на боку")]
-        public bool VagonOnLeftSidebool; //Вагон на боку
+        public bool VagonOnLeftSidebool; public string sVagonOnLeftSidebool;//Вагон на боку
 
         [Header("АВТОСЦЕПКА МЕЖДУ ВАГОНОМ 1-2")]
         [Tooltip("Применить газорезательное оборудование")]
-        public bool GazorezkaEnablebool1;  //Уборка за габарит пути
-        [Tooltip("Не зажато")]
-        public bool NeZazatobool1;  //Уборка за габарит пути
-        [Tooltip("Применить газорезательное оборудование")]
-        public bool GazorezkaEnablebool2;  //Уборка за габарит пути
-        [Tooltip("Не зажато")]
-        public bool NeZazatobool2;  //Уборка за габарит пути
+        public bool GazorezkaEnablebool1; public string sGazorezkaEnablebool1;//Уборка за габарит пути
+       [Tooltip("Не зажато")]
+        public bool NeZazatobool1; public string sNeZazatobool1;//Уборка за габарит пути
+       [Tooltip("Применить газорезательное оборудование")]
+        public bool GazorezkaEnablebool2; public string sGazorezkaEnablebool2;//Уборка за габарит пути
+       [Tooltip("Не зажато")]
+        public bool NeZazatobool2; public string sNeZazatobool2;//Уборка за габарит пути
         public string ScepInfo1 = " И № "; public string ScepInfo2 = " И № "; // название ближайших  вагонов между сцепкой
+        [Tooltip("Путь поврежден в этом месте?")]
+        public bool CorruptedPathbool; public string sCorruptedPathbool;//
+        public bool NoCorruptedPathbool; public string sNoCorruptedPathbool;//
     }
 }

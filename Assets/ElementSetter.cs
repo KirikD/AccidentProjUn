@@ -11,6 +11,7 @@ public class ElementSetter : MonoBehaviour
     {
        
     }
+
     public void ChangeElemUiName()
     {
         //  string[] array = xyz.Split(' ');  

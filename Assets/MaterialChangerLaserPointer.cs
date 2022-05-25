@@ -142,7 +142,8 @@ public class MaterialChangerLaserPointer : MonoBehaviour
 
             if (once)
             {
-                once = false; Hold = Hold ? false : true;
+                //Hold = true; //если Hold тру то ответ верный если фалс то не верный
+                once = false;  Hold = Hold ? false : true;
                 SetChildRendererCol(Color.red, Color.red, 2);
                 PressedFuncs?.Invoke();
             }
