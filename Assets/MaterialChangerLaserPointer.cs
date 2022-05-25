@@ -62,7 +62,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         }
 
         StartsFuncs?.Invoke();
-        UpdateMaterialState();
+        SetChildRendererCol(Color.white, Color.black, -0.1f);
     }
 
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
@@ -142,9 +142,9 @@ public class MaterialChangerLaserPointer : MonoBehaviour
 
             if (once)
             {
-                //Hold = true; //если Hold тру то ответ верный если фалс то не верный
-                once = false;  Hold = Hold ? false : true;
-                SetChildRendererCol(Color.red, Color.red, 2);
+                Hold = true; //если Hold тру то ответ верный если фалс то не верный
+                once = false;  //Hold = Hold ? false : true;
+                SetChildRendererCol(Color.magenta, Color.magenta, 2); // при зажатии выделяем ораньжевым
                 PressedFuncs?.Invoke();
             }
 
@@ -154,24 +154,27 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             once = true; onceB = true;
             // targetMat = Hovered; 
 
-            SetChildRendererCol(Color.yellow, Color.green, 1);
+            SetChildRendererCol(Color.cyan, Color.blue, 1);
             HoveredFuncs?.Invoke();
         }
         else
         {
+
             if (onceB)
             {
 
                 onceB = false;
                 if (SelectedHold) 
-                { 
-                    if (Hold) {
-                        OutlCol = Color.red; w = 3;
-                        disableColiders(false); Invoke("EnabColiders",5);
+                {
+                    if (Hold)
+                    { 
+                        OutlCol = Color.white; w = 2;
+                        Invoke(nameof(TestQuestionTruestFunc),0.1f);
                     }
                     else
                     {
-                        OutlCol = Color.black; w = -0.01f; 
+                        SetChildRendererCol(Color.white, Color.black, -0.1f);// OutlCol = Color.red; w = 3;
+
                     }
                 }
                 SetChildRendererCol(Color.white, OutlCol, w);
@@ -184,6 +187,24 @@ public class MaterialChangerLaserPointer : MonoBehaviour
              SetChildRendererMaterial(targetMat);
          }*/
     }
+    public string TestQuestionTruest = "white"; // правильность ответа на тест по конкретному элементу
+    public void TestQuestionTruestFunc(string ColorBOOL)// правильный цвет именно тут 
+    {
+// ЕСЛИ требуется отметить что правильно а что нет лишь в конце то запоминаем этот бул на каждом эелементе и запускаем функцию присвоения цвета после прохождения по тагу в цикле всем эелементам
+        TestQuestionTruest = ColorBOOL; // все что ниже убираем если хотем в конце запускать функцию
+        if (ColorBOOL == "white") SetChildRendererCol(Color.white, Color.white, 2);
+        if (ColorBOOL == "green") SetChildRendererCol(Color.white, Color.green, 2);
+        if (ColorBOOL == "red")     SetChildRendererCol(Color.red, Color.red, 4);
+
+    }
+    public void TestQuestionTruestFunc() // отложенная функция вызываем вконце чтобы расставить цвета
+    {
+        if (TestQuestionTruest == "white") SetChildRendererCol(Color.white, Color.white, 2);
+        if (TestQuestionTruest == "green") SetChildRendererCol(Color.white, Color.green, 2);
+        if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
+    }  
+
+
     void disableColiders(bool isOn) // отключим все коллайдеры
     {
         MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();

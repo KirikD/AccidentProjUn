@@ -81,8 +81,10 @@ public class VagonSelector : MonoBehaviour
     }
 
     int vagIndexList; string fullVagPathName; string scepinf;
-    public void SetTogleFieldsToArry(string vagName)
+    GameObject setElemOtvet;
+    public void SetTogleFieldsToArry(string vagName, GameObject Elem)
     {
+        setElemOtvet = Elem;
         string[] vagNames = vagName.Split('#');
         fullVagPathName = vagName;
         nameVag = vagNames[1]; Debug.Log(vagName + " ADgd: ");
@@ -93,28 +95,10 @@ public class VagonSelector : MonoBehaviour
                  Debug.Log("PoezdItems: " + PoezdItems[i].name + i);
                 if (vagNames[2] == "Scepka1")  scepinf = PoezdItems[i].ScepInfo1; if (vagNames[2] == "Scepka2") scepinf = PoezdItems[i].ScepInfo2;
                 OpenScreensToFill3Delements(vagNames[2]);
-                /*if (vagNames[2] == "Scepka1")
-                {
-                    ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
-                }
-                if (vagNames[2] == "Scepka2")
-                {
-                    ScepkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
-                }
-                if (vagNames[2] == "Platform")
-                { 
-                    UborkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
-                }
-                if (vagNames[2] == "Telezka1")
-                {
-                    TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
-                }
-                if (vagNames[2] == "Telezka2")
-                {
-                    TelezkaPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
-                }*/
+                //  
             }  
         }
+
     }
     // включаем нужные экраны для отмечания обжектов
     void OpenScreensToFill3Delements(string ObjName)
@@ -186,14 +170,14 @@ public class VagonSelector : MonoBehaviour
                 PathPanel.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Путь поврежден между №" + scepinf;
                 PathPanel.SetActive(true); ToolsButtonPanel.SetActive(false);
                 CorruptRails.isOn = false; NoCorruptRails.isOn = false;
-                print("dfg");
+                print("PathPanel" + setElemOtvet.name);
                 break;
             default:
                 //print("Incorrect intelligence level.");
                 break;
         }
     }
-
+    int tryQuestions; // кол во правильных ответов
     // функции отвечающие за применение булеонов к спискам
     public void FillListScepkaA(string vagName)
     {
@@ -202,6 +186,14 @@ public class VagonSelector : MonoBehaviour
         {
             PoezdItems[vagIndexList].GazorezkaEnablebool1 = GazorezkaEnable.isOn; PoezdItems[vagIndexList].sGazorezkaEnablebool1 = GazorezkaEnable.transform.GetChild(1).GetComponent<Text>().text;
             PoezdItems[vagIndexList].NeZazatobool1 = NeZazato.isOn; PoezdItems[vagIndexList].sNeZazatobool1 = NeZazato.transform.GetChild(1).GetComponent<Text>().text;
+            // проверяем правильно ли прошли IdealBaseItems
+            setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
+            if (PoezdItems[vagIndexList].GazorezkaEnablebool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].GazorezkaEnablebool1 == IdealBaseItems[vagIndexList].GazorezkaEnablebool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            if (PoezdItems[vagIndexList].NeZazatobool1) // если элемент тру то проверяем сопоставление TestQuestionTruestFunc
+                if (PoezdItems[vagIndexList].NeZazatobool1 == IdealBaseItems[vagIndexList].NeZazatobool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
         }
     }
     public void FillListScepkaB(string vagName)
@@ -211,6 +203,14 @@ public class VagonSelector : MonoBehaviour
         {
             PoezdItems[vagIndexList].GazorezkaEnablebool2 = GazorezkaEnable.isOn; PoezdItems[vagIndexList].sGazorezkaEnablebool2 = GazorezkaEnable.transform.GetChild(1).GetComponent<Text>().text;
             PoezdItems[vagIndexList].NeZazatobool2 = NeZazato.isOn; PoezdItems[vagIndexList].sNeZazatobool2 = NeZazato.transform.GetChild(1).GetComponent<Text>().text;
+            // проверяем правильно ли прошли IdealBaseItems
+            setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
+            if (PoezdItems[vagIndexList].GazorezkaEnablebool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].GazorezkaEnablebool2 == IdealBaseItems[vagIndexList].GazorezkaEnablebool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            if (PoezdItems[vagIndexList].NeZazatobool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].NeZazatobool2 == IdealBaseItems[vagIndexList].NeZazatobool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
         } 
     }
     public void FillListPlatform(string vagName)
@@ -221,10 +221,14 @@ public class VagonSelector : MonoBehaviour
         PoezdItems[vagIndexList].AngleVagonToKuvetbool = AngleVagonToKuvet.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetbool = AngleVagonToKuvet.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].VagonOnLeftSidebool = VagonOnLeftSide.isOn; PoezdItems[vagIndexList].sVagonOnLeftSidebool = VagonOnLeftSide.transform.GetChild(1).GetComponent<Text>().text;
+
+    }
+    public void FillListrails(string vagName)
+    {
         PoezdItems[vagIndexList].CorruptedPathbool = CorruptRails.isOn; PoezdItems[vagIndexList].sCorruptedPathbool = CorruptRails.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].NoCorruptedPathbool = NoCorruptRails.isOn; PoezdItems[vagIndexList].sNoCorruptedPathbool = NoCorruptRails.transform.GetChild(1).GetComponent<Text>().text;
     }
-    public void FillTelezka1(string vagName) // номер тележки 1 или 2
+        public void FillTelezka1(string vagName) // номер тележки 1 или 2
     {
         string[] vagNames = fullVagPathName.Split('#'); Debug.Log("T1 " + vagNames[2]);
         if (vagNames[2] == "Telezka1") { 
