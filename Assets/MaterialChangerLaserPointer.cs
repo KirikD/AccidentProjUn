@@ -64,6 +64,8 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         StartsFuncs?.Invoke();
         SetChildRendererCol(Color.white, Color.black, -0.1f);
         AllGuiVagonsPanels = GameObject.Find("CanvasOnHand").GetComponent<VagonSelector>() ;
+        allColls = GameObject.FindObjectsOfType<MaterialChangerLaserPointer>(); 
+        bodies = GetComponentsInChildren<MeshCollider>();
     }
 
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
@@ -214,15 +216,17 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
     }
     void EnabAllColls() { DisableAllColiders(true);  }
+    MaterialChangerLaserPointer[] allColls;
     public void DisableAllColiders(bool isOn) // отключим все коллайдеры
-    {
-        MaterialChangerLaserPointer[] allColls = GameObject.FindObjectsOfType<MaterialChangerLaserPointer>();
+    {//MaterialChangerLaserPointer[] allColls = GameObject.FindObjectsOfType<MaterialChangerLaserPointer>();
+         
         for (int i = 0; i < allColls.Length; i++)
             allColls[i].disableThisColider(isOn);
     }
+    MeshCollider[] bodies;
     void disableThisColider(bool isOn) // отключим коллайдер
-    {
-        MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();
+    { // MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();
+         
         foreach (MeshCollider body in bodies)
         {
             body.enabled = isOn;
