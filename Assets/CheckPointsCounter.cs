@@ -22,17 +22,18 @@ public class CheckPointsCounter : MonoBehaviour
     public GameObject preFinalPanel; public GameObject preFinalNextBtt; public GameObject preFinalUndoBtt; public Text preFinalPanelTitle;
     public void ReaultsFinalScore()
     {
+        Debug.Log(TeleportPointsCounter + "ReaultsFinalScore  " + gameObject.name);
         finalScoreVagons = vagonSelector.tryQuestions; //TeleportPointsCounter
-        if (TeleportPointsCounter > 15 && TeleportPointsCounter > 12) // условие что мы прошли симулятор осмотр вагонов
+        if (TeleportPointsCounter > 15 && finalScoreVagons > 12) // условие что мы прошли симулятор осмотр вагонов
         {
             preFinalPanel.SetActive(true);
-            preFinalPanelTitle.text = "вы отметили все неисправности " + TeleportPointsCounter + " и прошли все " + TeleportPointsCounter + "точек!";
+            preFinalPanelTitle.text = "вы отметили все неисправности " + finalScoreVagons + " и прошли все " + TeleportPointsCounter + "точек!";
             preFinalUndoBtt.SetActive(false); preFinalNextBtt.SetActive(true);
         }
         else
         {
             preFinalPanel.SetActive(true);
-            preFinalPanelTitle.text = "вы прошли всего " + TeleportPointsCounter + " из 15 а так же не правильно отметили неисправности их " + TeleportPointsCounter + " а вы отметили всего";
+            preFinalPanelTitle.text = "вы осмотрели всего " + TeleportPointsCounter + " точек из 15 а так же не правильно отметили неисправности их " + "40" + " а вы отметили всего " + finalScoreVagons;
             preFinalUndoBtt.SetActive(true); preFinalNextBtt.SetActive(false);
         }
 

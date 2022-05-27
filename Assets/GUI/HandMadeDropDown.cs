@@ -31,4 +31,16 @@ public class HandMadeDropDown : MonoBehaviour
         DropList.SetActive(false);
         DropText.color = Color.black;
     }
+    bool isOpenDropList;
+    public void OpenCloseDropList() //booleanVar = !booleanVar;
+    {
+        HandMadeDropDown[] allDrops = GameObject.FindObjectsOfType<HandMadeDropDown>();
+        for (int i = 0; i < allDrops.Length; i++)
+            allDrops[i].DropList.SetActive(false);
+       // isOpenDropList = isOpenDropList ? false : true;
+       // if (isOpenDropList)
+            DropList.SetActive(true);
+       // else
+       //     DropList.SetActive(false);
+    }
 }

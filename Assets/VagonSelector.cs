@@ -74,7 +74,9 @@ public class VagonSelector : MonoBehaviour
     public GameObject PathPanel;
     public GameObject UborkaPanel;
     public GameObject ScepkaPanel;
-    UnityEvent ElementSetter_MyEvent; //  ElementSetter_MyEvent.Invoke();
+    [Header("Массив всех панелей где мы отмечаем вагоны")]
+    public GameObject[] GuiVagons;
+   UnityEvent ElementSetter_MyEvent; //  ElementSetter_MyEvent.Invoke();
     void Start()
     {
         ElementSetter.OnSelectedEvent += SetTogleFieldsToArry;

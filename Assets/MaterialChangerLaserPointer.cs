@@ -63,6 +63,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
 
         StartsFuncs?.Invoke();
         SetChildRendererCol(Color.white, Color.black, -0.1f);
+        AllGuiVagonsPanels = GameObject.Find("CanvasOnHand").GetComponent<VagonSelector>() ;
     }
 
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
@@ -123,6 +124,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
     }
     [FormerlySerializedAs("Если стоит то мы можем выделить красным наш обжект")]
     public bool SelectedHold; bool Hold = false; bool once = true; bool onceB = true;
+    public VagonSelector AllGuiVagonsPanels;
     public void UpdateMaterialState()
     {
         Color OutlCol = Color.black;
@@ -169,7 +171,15 @@ public class MaterialChangerLaserPointer : MonoBehaviour
                     if (Hold)
                     { 
                         OutlCol = Color.white; w = 2;
-                        Invoke(nameof(TestQuestionTruestFunc),0.1f);
+                        Invoke(nameof(TestQuestionTruestFunc),0.001f);
+                        // отключили все коллайдеры всей сцены всех активных элементов только если окно открыто Invoke(nameof(EnabAllColls), 0.5f);// это жесткий костыль принудительное включение
+                        for (int i = 0; i < AllGuiVagonsPanels.GuiVagons.Length; i++)
+                            if (AllGuiVagonsPanels.GuiVagons[i].activeSelf == false)
+                                DisableAllColiders(true);
+                        for (int i = 0; i < AllGuiVagonsPanels.GuiVagons.Length; i++)
+                            if (AllGuiVagonsPanels.GuiVagons[i].activeSelf == true)
+                                DisableAllColiders(false);
+                        
                     }
                     else
                     {
@@ -195,17 +205,22 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         if (ColorBOOL == "white") SetChildRendererCol(Color.white, Color.white, 2);
         if (ColorBOOL == "green") SetChildRendererCol(Color.white, Color.green, 2);
         if (ColorBOOL == "red")     SetChildRendererCol(Color.red, Color.red, 4);
-
+        //DisableAllColiders(true);
     }
     public void TestQuestionTruestFunc() // отложенная функция вызываем вконце чтобы расставить цвета
     {
         if (TestQuestionTruest == "white") SetChildRendererCol(Color.white, Color.white, 2);
         if (TestQuestionTruest == "green") SetChildRendererCol(Color.white, Color.green, 2);
         if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
-    }  
-
-
-    void disableColiders(bool isOn) // отключим все коллайдеры
+    }
+    void EnabAllColls() { DisableAllColiders(true);  }
+    public void DisableAllColiders(bool isOn) // отключим все коллайдеры
+    {
+        MaterialChangerLaserPointer[] allColls = GameObject.FindObjectsOfType<MaterialChangerLaserPointer>();
+        for (int i = 0; i < allColls.Length; i++)
+            allColls[i].disableThisColider(isOn);
+    }
+    void disableThisColider(bool isOn) // отключим коллайдер
     {
         MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();
         foreach (MeshCollider body in bodies)
@@ -213,8 +228,8 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             body.enabled = isOn;
         }
     }
-    void EnabColiders() // включем все коллайдеры
-    { disableColiders(true); }
+    void EnabColiders() // включем  коллайдер
+    { disableThisColider(true); }
     private void SetChildRendererCol(Color targetCol, Color outlColor, float width)
     {
         GetComponentsInChildren(true, s_rederers);

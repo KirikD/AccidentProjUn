@@ -225,7 +225,10 @@ namespace Valve.VR.InteractionSystem
 			titleText.color = titleColor;
 		}
 		public void SetVived()
-		{ TeleportThisArea?.Invoke(); }
+		{
+			gameObject.name += "_Visited";
+			TeleportThisArea?.Invoke();
+		}
 
 		//-------------------------------------------------
 		public void TeleportToScene()
