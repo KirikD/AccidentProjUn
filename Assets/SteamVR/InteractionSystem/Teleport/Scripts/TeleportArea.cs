@@ -3,7 +3,7 @@
 // Purpose: An area that the player can teleport to
 //
 //=============================================================================
-
+using UnityEngine.Events;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,7 +24,7 @@ namespace Valve.VR.InteractionSystem
 		private Color highlightedTintColor = Color.clear;
 		private Color lockedTintColor = Color.clear;
 		private bool highlighted = false;
-
+		public UnityEvent TeleportThisArea;
 		//-------------------------------------------------
 		public void Awake()
 		{
@@ -72,6 +72,7 @@ namespace Valve.VR.InteractionSystem
 
 				if ( highlight )
 				{
+					TeleportThisArea?.Invoke(); // навели на телепорт
 					areaMesh.material = Teleport.instance.areaHighlightedMaterial;
 				}
 				else

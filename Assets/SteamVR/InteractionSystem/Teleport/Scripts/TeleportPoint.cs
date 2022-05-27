@@ -3,7 +3,7 @@
 // Purpose: Single location that the player can teleport to
 //
 //=============================================================================
-
+using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_EDITOR
@@ -51,8 +51,8 @@ namespace Valve.VR.InteractionSystem
 		private const string switchSceneAnimation = "switch_scenes_idle";
 		private const string moveLocationAnimation = "move_location_idle";
 		private const string lockedAnimation = "locked_idle";
-
-
+		public UnityEvent TeleportThisArea;
+		public UnityEvent TeleportHighlight;
 		//-------------------------------------------------
 		public override bool showReticle
 		{
@@ -108,6 +108,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		public override bool ShouldActivate( Vector3 playerPosition )
 		{
+			
 			return ( Vector3.Distance( transform.position, playerPosition ) > 1.0f );
 		}
 
@@ -118,7 +119,7 @@ namespace Valve.VR.InteractionSystem
 			return true;
 		}
 
-
+		public bool ChecOnHighlight;
 		//-------------------------------------------------
 		public override void Highlight( bool highlight )
 		{
@@ -136,6 +137,9 @@ namespace Valve.VR.InteractionSystem
 
 			if ( highlight )
 			{
+				//Debug.LogError("Пришли таки34333");
+				if(ChecOnHighlight)
+					TeleportHighlight?.Invoke(); //Invoke(nameof(TeleportThisFunc), 1); //TeleportThisArea?.Invoke(); // навели на телепорт
 				pointIcon.gameObject.SetActive( true );
 				animation.Play();
 			}
@@ -145,7 +149,7 @@ namespace Valve.VR.InteractionSystem
 				animation.Stop();
 			}
 		}
-
+		//void TeleportThisFunc() { TeleportHighlight?.Invoke(); }
 
 		//-------------------------------------------------
 		public override void UpdateVisuals()
@@ -166,7 +170,7 @@ namespace Valve.VR.InteractionSystem
 			else
 			{
 				SetMeshMaterials( Teleport.instance.pointVisibleMaterial, titleVisibleColor );
-
+				
 				switch ( teleportType )
 				{
 					case TeleportPointType.MoveToLocation:
@@ -174,6 +178,7 @@ namespace Valve.VR.InteractionSystem
 							pointIcon = moveLocationIcon;
 
 							animation.clip = animation.GetClip( moveLocationAnimation );
+							
 						}
 						break;
 					case TeleportPointType.SwitchToNewScene:
@@ -186,7 +191,7 @@ namespace Valve.VR.InteractionSystem
 				}
 			}
 
-			titleText.text = title;
+			titleText.text = title +" "+ this.gameObject.name;
 		}
 
 
@@ -209,6 +214,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		public void SetMeshMaterials( Material material, Color textColor )
 		{
+		
 			markerMesh.material = material;
 			switchSceneIcon.material = material;
 			moveLocationIcon.material = material;
@@ -218,13 +224,16 @@ namespace Valve.VR.InteractionSystem
 			fullTitleAlpha = textColor.a;
 			titleText.color = titleColor;
 		}
-
+		public void SetVived()
+		{ TeleportThisArea?.Invoke(); }
 
 		//-------------------------------------------------
 		public void TeleportToScene()
 		{
+			
 			if ( !string.IsNullOrEmpty( switchToScene ) )
 			{
+				
 				Debug.Log("<b>[SteamVR Interaction]</b> TeleportPoint: Hook up your level loading logic to switch to new scene: " + switchToScene, this);
 			}
 			else
@@ -285,7 +294,7 @@ namespace Valve.VR.InteractionSystem
 			else
 			{
 				lockedIcon.gameObject.SetActive( false );
-
+			
 				markerMesh.sharedMaterial = Teleport.instance.pointVisibleMaterial;
 				switchSceneIcon.sharedMaterial = Teleport.instance.pointVisibleMaterial;
 				moveLocationIcon.sharedMaterial = Teleport.instance.pointVisibleMaterial;
@@ -296,6 +305,7 @@ namespace Valve.VR.InteractionSystem
 				{
 					case TeleportPointType.MoveToLocation:
 						{
+						
 							moveLocationIcon.gameObject.SetActive( true );
 							switchSceneIcon.gameObject.SetActive( false );
 						}

@@ -852,7 +852,7 @@ namespace Valve.VR.InteractionSystem
 			Invoke( "TeleportPlayer", currentFadeTime );
 		}
 
-
+		void TeleportThisFunc() { TeleportPoint teleportPoint = teleportingToMarker as TeleportPoint; teleportPoint.SetVived(); }
 		//-------------------------------------------------
 		private void TeleportPlayer()
 		{
@@ -868,7 +868,8 @@ namespace Valve.VR.InteractionSystem
 			if ( teleportPoint != null )
 			{
 				teleportPosition = teleportPoint.transform.position;
-
+				//teleportPoint.SetVived();
+				Invoke(nameof(TeleportThisFunc), 0.5f);
 				//Teleport to a new scene
 				if ( teleportPoint.teleportType == TeleportPoint.TeleportPointType.SwitchToNewScene )
 				{

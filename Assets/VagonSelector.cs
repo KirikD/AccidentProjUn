@@ -177,7 +177,7 @@ public class VagonSelector : MonoBehaviour
                 break;
         }
     }
-    int tryQuestions; // кол во правильных ответов
+    public int tryQuestions; // кол во правильных ответов
     // функции отвечающие за применение булеонов к спискам
     public void FillListScepkaA(string vagName)
     {
@@ -222,11 +222,40 @@ public class VagonSelector : MonoBehaviour
         PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].VagonOnLeftSidebool = VagonOnLeftSide.isOn; PoezdItems[vagIndexList].sVagonOnLeftSidebool = VagonOnLeftSide.transform.GetChild(1).GetComponent<Text>().text;
 
+        // проверяем правильно ли прошли IdealBaseItems
+        setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
+        if (PoezdItems[vagIndexList].DestroedRailbools) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].DestroedRailbools == IdealBaseItems[vagIndexList].DestroedRailbools) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+        if (PoezdItems[vagIndexList].BoundsPathCorruptbool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].BoundsPathCorruptbool == IdealBaseItems[vagIndexList].BoundsPathCorruptbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+        if (PoezdItems[vagIndexList].FailsCargebool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].FailsCargebool == IdealBaseItems[vagIndexList].FailsCargebool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+     
+        if (PoezdItems[vagIndexList].AngleVagonToKuvetbool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].AngleVagonToKuvetbool == IdealBaseItems[vagIndexList].AngleVagonToKuvetbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+        if (PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool == IdealBaseItems[vagIndexList].AngleVagonToKuvetCenterbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+        if (PoezdItems[vagIndexList].VagonOnLeftSidebool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].VagonOnLeftSidebool == IdealBaseItems[vagIndexList].VagonOnLeftSidebool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
     }
     public void FillListrails(string vagName)
     {
         PoezdItems[vagIndexList].CorruptedPathbool = CorruptRails.isOn; PoezdItems[vagIndexList].sCorruptedPathbool = CorruptRails.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].NoCorruptedPathbool = NoCorruptRails.isOn; PoezdItems[vagIndexList].sNoCorruptedPathbool = NoCorruptRails.transform.GetChild(1).GetComponent<Text>().text;
+        // проверяем правильно ли прошли IdealBaseItems
+        setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
+        if (PoezdItems[vagIndexList].CorruptedPathbool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].CorruptedPathbool == IdealBaseItems[vagIndexList].CorruptedPathbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+        if (PoezdItems[vagIndexList].NoCorruptedPathbool) // если элемент тру то проверяем сопоставление
+            if (PoezdItems[vagIndexList].NoCorruptedPathbool == IdealBaseItems[vagIndexList].NoCorruptedPathbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
     }
         public void FillTelezka1(string vagName) // номер тележки 1 или 2
     {
@@ -235,17 +264,76 @@ public class VagonSelector : MonoBehaviour
             PoezdItems[vagIndexList].TelezkaMezduputAbool1 = TelezkaMezduputA.isOn; PoezdItems[vagIndexList].sTelezkaMezduputAbool1 = TelezkaMezduputA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону междупутья
             PoezdItems[vagIndexList].TelezkaKuvetAbool1 = TelezkaKuvetA.isOn; PoezdItems[vagIndexList].sTelezkaKuvetAbool1 = TelezkaKuvetA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону обочины 
             PoezdItems[vagIndexList].TelezkaMezduputBbool1 = TelezkaMezduputB.isOn; PoezdItems[vagIndexList].sTelezkaMezduputBbool1 = TelezkaMezduputB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону междупутья
+           
             PoezdItems[vagIndexList].TelezkaKuvetBbool1 = TelezkaKuvetB.isOn; PoezdItems[vagIndexList].sTelezkaKuvetBbool1 = TelezkaKuvetB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону обочины 
             PoezdItems[vagIndexList].UnderVagonbool1 = UnderVagon.isOn; PoezdItems[vagIndexList].sUnderVagonbool1 = UnderVagon.transform.GetChild(1).GetComponent<Text>().text;//под вагоном 
             PoezdItems[vagIndexList].NearTheWagonbool1 = NearTheWagon.isOn; PoezdItems[vagIndexList].sNearTheWagonbool1 = NearTheWagon.transform.GetChild(1).GetComponent<Text>().text;//около вагона
+           
             PoezdItems[vagIndexList].OutsideRailsbool1 = OutsideRails.isOn; PoezdItems[vagIndexList].sOutsideRailsbool1 = OutsideRails.transform.GetChild(1).GetComponent<Text>().text;//Вне пути
             PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 = NakatnoeOborudovanie.isOn; PoezdItems[vagIndexList].sNakatnoeOborudovaniebool1 = NakatnoeOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Накаточное оборудование
             PoezdItems[vagIndexList].GidroOborudovaniebool1 = GidroOborudovanie.isOn; PoezdItems[vagIndexList].sGidroOborudovaniebool1 = GidroOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Гидравлическое оборудование
+           
             PoezdItems[vagIndexList].LiftTheVagonbool1 = LiftTheVagon.isOn; PoezdItems[vagIndexList].sLiftTheVagonbool1 = LiftTheVagon.transform.GetChild(1).GetComponent<Text>().text;//поднять целиком
             PoezdItems[vagIndexList].LiftoneSidebool1 = LiftoneSide.isOn; PoezdItems[vagIndexList].sLiftoneSidebool1 = LiftoneSide.transform.GetChild(1).GetComponent<Text>().text;//поднять за одну сторону
             PoezdItems[vagIndexList].UnloadCargebool1 = UnloadCarge.isOn; PoezdItems[vagIndexList].sUnloadCargebool1 = UnloadCarge.transform.GetChild(1).GetComponent<Text>().text;//выгрузить груз и поднять целиком
+           
             PoezdItems[vagIndexList].OutToOveralSizebool1 = OutToOveralSize.isOn; PoezdItems[vagIndexList].sOutToOveralSizebool1 = OutToOveralSize.transform.GetChild(1).GetComponent<Text>().text;//Уборка за габарит пути Vibita
             PoezdItems[vagIndexList].Vibitabool1 = Vibita.isOn; PoezdItems[vagIndexList].sVibitabool1 = Vibita.transform.GetChild(1).GetComponent<Text>().text;
+            // проверяем правильно ли прошли IdealBaseItems
+            setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
+            int TryesSumm = 0;// проверяем правильно ли прошли IdealBaseItems 
+            if (PoezdItems[vagIndexList].TelezkaMezduputAbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaMezduputAbool1 == IdealBaseItems[vagIndexList].TelezkaMezduputAbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].TelezkaKuvetAbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaKuvetAbool1 == IdealBaseItems[vagIndexList].TelezkaKuvetAbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].TelezkaMezduputBbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaMezduputBbool1 == IdealBaseItems[vagIndexList].TelezkaMezduputBbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].TelezkaKuvetBbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaKuvetBbool1 == IdealBaseItems[vagIndexList].TelezkaKuvetBbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].UnderVagonbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].UnderVagonbool1 == IdealBaseItems[vagIndexList].UnderVagonbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].NearTheWagonbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].NearTheWagonbool1 == IdealBaseItems[vagIndexList].NearTheWagonbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].OutsideRailsbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].OutsideRailsbool1 == IdealBaseItems[vagIndexList].OutsideRailsbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].NakatnoeOborudovaniebool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].NakatnoeOborudovaniebool1 == IdealBaseItems[vagIndexList].NakatnoeOborudovaniebool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].GidroOborudovaniebool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].GidroOborudovaniebool1 == IdealBaseItems[vagIndexList].GidroOborudovaniebool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].LiftTheVagonbool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].LiftTheVagonbool1 == IdealBaseItems[vagIndexList].LiftTheVagonbool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].LiftoneSidebool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].LiftoneSidebool1 == IdealBaseItems[vagIndexList].LiftoneSidebool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].UnloadCargebool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].UnloadCargebool1 == IdealBaseItems[vagIndexList].UnloadCargebool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].OutToOveralSizebool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].OutToOveralSizebool1 == IdealBaseItems[vagIndexList].OutToOveralSizebool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].Vibitabool1) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].Vibitabool1 == IdealBaseItems[vagIndexList].Vibitabool1) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            // сумму правильных ответов считаем и если больше порога то разрешаем
+            if (TryesSumm > 3)
+            {
+                tryQuestions += 1;
+                setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");
+            }
         }
     }
     public void FillTelezka2(string vagName) // номер тележки 1 или 2
@@ -255,17 +343,75 @@ public class VagonSelector : MonoBehaviour
             PoezdItems[vagIndexList].TelezkaMezduputAbool2 = TelezkaMezduputA.isOn; PoezdItems[vagIndexList].sTelezkaMezduputAbool2 = TelezkaMezduputA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону междупутья
             PoezdItems[vagIndexList].TelezkaKuvetAbool2 = TelezkaKuvetA.isOn; PoezdItems[vagIndexList].sTelezkaKuvetAbool2 = TelezkaKuvetA.transform.GetChild(1).GetComponent<Text>().text;//Сход меньше 50 см  в сторону обочины 
             PoezdItems[vagIndexList].TelezkaMezduputBbool2 = TelezkaMezduputB.isOn; PoezdItems[vagIndexList].sTelezkaMezduputBbool2 = TelezkaMezduputB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону междупутья
+          
             PoezdItems[vagIndexList].TelezkaKuvetBbool2 = TelezkaKuvetB.isOn; PoezdItems[vagIndexList].sTelezkaKuvetBbool2 = TelezkaKuvetB.transform.GetChild(1).GetComponent<Text>().text;//Сход больше 50 см  в сторону обочины 
             PoezdItems[vagIndexList].UnderVagonbool2 = UnderVagon.isOn; PoezdItems[vagIndexList].sUnderVagonbool2 = UnderVagon.transform.GetChild(1).GetComponent<Text>().text;//под вагоном 
             PoezdItems[vagIndexList].NearTheWagonbool2 = NearTheWagon.isOn; PoezdItems[vagIndexList].sNearTheWagonbool2 = NearTheWagon.transform.GetChild(1).GetComponent<Text>().text;//около вагона
+           
             PoezdItems[vagIndexList].OutsideRailsbool2 = OutsideRails.isOn; PoezdItems[vagIndexList].sOutsideRailsbool2 = OutsideRails.transform.GetChild(1).GetComponent<Text>().text;//Вне пути
             PoezdItems[vagIndexList].NakatnoeOborudovaniebool2 = NakatnoeOborudovanie.isOn; PoezdItems[vagIndexList].sNakatnoeOborudovaniebool2 = NakatnoeOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Накаточное оборудование
             PoezdItems[vagIndexList].GidroOborudovaniebool2 = GidroOborudovanie.isOn; PoezdItems[vagIndexList].sGidroOborudovaniebool2 = GidroOborudovanie.transform.GetChild(1).GetComponent<Text>().text;//Гидравлическое оборудование
+          
             PoezdItems[vagIndexList].LiftTheVagonbool2 = LiftTheVagon.isOn; PoezdItems[vagIndexList].sLiftTheVagonbool2 = LiftTheVagon.transform.GetChild(1).GetComponent<Text>().text;//поднять целиком
             PoezdItems[vagIndexList].LiftoneSidebool2 = LiftoneSide.isOn; PoezdItems[vagIndexList].sLiftoneSidebool2 = LiftoneSide.transform.GetChild(1).GetComponent<Text>().text;//поднять за одну сторону
             PoezdItems[vagIndexList].UnloadCargebool2 = UnloadCarge.isOn; PoezdItems[vagIndexList].sUnloadCargebool2 = UnloadCarge.transform.GetChild(1).GetComponent<Text>().text;//выгрузить груз и поднять целиком
+          
             PoezdItems[vagIndexList].OutToOveralSizebool2 = OutToOveralSize.isOn; PoezdItems[vagIndexList].sOutToOveralSizebool2 = OutToOveralSize.transform.GetChild(1).GetComponent<Text>().text;//Уборка за габарит пути
             PoezdItems[vagIndexList].Vibitabool2 = Vibita.isOn; PoezdItems[vagIndexList].sVibitabool2 = Vibita.transform.GetChild(1).GetComponent<Text>().text;
+            // проверяем правильно ли прошли IdealBaseItems
+            setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
+            int TryesSumm = 0;// проверяем правильно ли прошли IdealBaseItems 
+            if (PoezdItems[vagIndexList].TelezkaMezduputAbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaMezduputAbool2 == IdealBaseItems[vagIndexList].TelezkaMezduputAbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].TelezkaKuvetAbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaKuvetAbool2 == IdealBaseItems[vagIndexList].TelezkaKuvetAbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].TelezkaMezduputBbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaMezduputBbool2 == IdealBaseItems[vagIndexList].TelezkaMezduputBbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].TelezkaKuvetBbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].TelezkaKuvetBbool2 == IdealBaseItems[vagIndexList].TelezkaKuvetBbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].UnderVagonbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].UnderVagonbool2 == IdealBaseItems[vagIndexList].UnderVagonbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].NearTheWagonbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].NearTheWagonbool2 == IdealBaseItems[vagIndexList].NearTheWagonbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].OutsideRailsbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].OutsideRailsbool2 == IdealBaseItems[vagIndexList].OutsideRailsbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].NakatnoeOborudovaniebool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].NakatnoeOborudovaniebool2 == IdealBaseItems[vagIndexList].NakatnoeOborudovaniebool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].GidroOborudovaniebool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].GidroOborudovaniebool2 == IdealBaseItems[vagIndexList].GidroOborudovaniebool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].LiftTheVagonbool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].LiftTheVagonbool2 == IdealBaseItems[vagIndexList].LiftTheVagonbool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); TryesSumm++; }
+            if (PoezdItems[vagIndexList].LiftoneSidebool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].LiftoneSidebool2 == IdealBaseItems[vagIndexList].LiftoneSidebool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");TryesSumm++; }
+            if (PoezdItems[vagIndexList].UnloadCargebool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].UnloadCargebool2 == IdealBaseItems[vagIndexList].UnloadCargebool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+
+            if (PoezdItems[vagIndexList].OutToOveralSizebool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].OutToOveralSizebool2 == IdealBaseItems[vagIndexList].OutToOveralSizebool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            if (PoezdItems[vagIndexList].Vibitabool2) // если элемент тру то проверяем сопоставление
+                if (PoezdItems[vagIndexList].Vibitabool2 == IdealBaseItems[vagIndexList].Vibitabool2) // если в идеальной базе тоже этот элемент тру то мы ответили верно
+                { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");  TryesSumm++; }
+            // сумму правильных ответов считаем и если больше порога то разрешаем
+            if (TryesSumm > 3) {
+                tryQuestions += 1;
+                setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); 
+            }
         }
     }
     public void BaseChecingOperation()

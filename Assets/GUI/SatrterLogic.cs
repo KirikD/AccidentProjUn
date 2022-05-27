@@ -28,14 +28,12 @@ public class SatrterLogic : MonoBehaviour
                 if (loot[i].questionsObjs[ii].isOn != loot[i].questTrues[ii])
                 {
                     MistakesCount += 1; 
-                }
-                
-
+                }                
             }
-
         }
         Debug.Log("MistakesCount "  + MistakesCount/2);
-        EndTextTest.text = "Вы не прошли тест и допустили " + MistakesCount/2 + " ошибки ";
+        EndTextTest.text = "Вы не прошли тест и допустили " + (MistakesCount/2) + " ошибки ";
+        if (MistakesCount/2 == 1)   EndTextTest.text = "Вы не прошли тест и допустили " + (MistakesCount / 2) + " ошибку ";
         if (MistakesCount == 0)
         {
             EndTextTest.text = "Идеально пройденный тест! Нет ошибок!";
