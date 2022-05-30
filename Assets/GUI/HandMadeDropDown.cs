@@ -30,8 +30,16 @@ public class HandMadeDropDown : MonoBehaviour
         }
         DropList.SetActive(false);
         DropText.color = Color.black;
+
+        for (int ii = 0; ii < AllLinesArr.Length; ii++) // когда выбрали скрываем все!
+        {
+            AllLinesArr[ii].interactable = true;
+            AllLinesArr[ii].blocksRaycasts = true;
+        }
     }
     bool isOpenDropList;
+
+    public CanvasGroup[] AllLinesArr;
     public void OpenCloseDropList() //booleanVar = !booleanVar;
     {
         HandMadeDropDown[] allDrops = GameObject.FindObjectsOfType<HandMadeDropDown>();
@@ -40,7 +48,14 @@ public class HandMadeDropDown : MonoBehaviour
        // isOpenDropList = isOpenDropList ? false : true;
        // if (isOpenDropList)
             DropList.SetActive(true);
-       // else
-       //     DropList.SetActive(false);
+        // else
+        //     DropList.SetActive(false);
+        // когда выбрали скрываем все!
+        DropList.transform.SetParent(this.gameObject.transform.parent.parent.transform, true);
+        for (int ii = 0; ii < AllLinesArr.Length; ii++)
+        {
+            AllLinesArr[ii].interactable = false;
+            AllLinesArr[ii].blocksRaycasts = false;
+        }
     }
 }

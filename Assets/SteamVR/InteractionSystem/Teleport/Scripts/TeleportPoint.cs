@@ -224,10 +224,11 @@ namespace Valve.VR.InteractionSystem
 			fullTitleAlpha = textColor.a;
 			titleText.color = titleColor;
 		}
-		public void SetVived()
+		public void SetVived() // щелкнули по точке телепорта телепортировались в нее
 		{
 			gameObject.name += "_Visited";
 			TeleportThisArea?.Invoke();
+			this.gameObject.transform.GetChild(0).GetComponent<SphereCollider>().enabled = false; // важно мы коллайдер отрубили
 		}
 
 		//-------------------------------------------------
