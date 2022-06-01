@@ -6,9 +6,12 @@ public class HandMadeDropDown : MonoBehaviour
 {
     public GameObject DropList;
     public Text DropText;
+     Toggle[] ToglessAll;
+    HandMadeDropDown[] allDrops;
     void Start()
     {
         DropList.SetActive(false);
+        ToglessAll = DropList.GetComponentsInChildren<Toggle>();
     }
     [Header("Весь список Элементов")]
     public string[] dropTxt;
@@ -26,15 +29,40 @@ public class HandMadeDropDown : MonoBehaviour
                 selectedStr = dropT;
                 DropText.text = dropT;
             }
-            
+
+
         }
         DropList.SetActive(false);
         DropText.color = Color.black;
 
-        for (int ii = 0; ii < AllLinesArr.Length; ii++) // когда выбрали скрываем все!
+        for (int ii = 0; ii < AllLinesArr.Length; ii++) // когда выбрали скрываем все! BttHandMadeDropDownB
         {
             AllLinesArr[ii].interactable = true;
             AllLinesArr[ii].blocksRaycasts = true;
+        }
+        if (gameObject.name == "BttHandMadeDropDownB")
+        {
+            int TogVal = 0;
+            int.TryParse(dropT, out TogVal);
+            allDrops = GameObject.FindObjectsOfType<HandMadeDropDown>();
+            for (int i = 0; i < allDrops.Length; i++)
+            {
+                //if (allDrops[i].DropList.transform.GetChild(TogVal).GetComponent<Toggle>().isOn == true)
+                if (allDrops[i].gameObject.name == "BttHandMadeDropDownB")
+                {
+                    if(allDrops[i].ToglessAll[TogVal - 1].isOn == false)
+                    allDrops[i].ToglessAll[TogVal - 1].interactable = false;
+                    //  allDrops[i].ToglessAll[TogVal - 1].gameObject.SetActive(false); 
+                }
+
+            }
+            GetComponent<HandMadeDropDown>().ToglessAll[TogVal - 1].interactable = true; // этот конкретный тогл.
+
+            if (GetComponent<HandMadeDropDown>().ToglessAll[TogVal - 1].isOn == false)
+            {
+                for (int i = 0; i < allDrops.Length; i++)
+                {   if (allDrops[i].gameObject.name == "BttHandMadeDropDownB")  {       allDrops[i].ToglessAll[TogVal - 1].interactable = true; } DropText.text = "0"; DropText.color = Color.red; }
+            }
         }
     }
     bool isOpenDropList;
