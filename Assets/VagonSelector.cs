@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+// надо сделать
+//1 инстурмент линейка
+//2 когда телепортируемся поинтеры отключаем
+//3 выбор тележек в базе баг надо чтобы верно было только когда полное совпадение с идеальной базой
+//4 
+//
+//
 public class VagonSelector : MonoBehaviour
 {  // все данные для одной стороны вагона
     [Header("ВАГОН Номер")]

@@ -1136,14 +1136,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 44
-    m_Alignment: 4
+    m_MaxSize: 38
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: " 2. \u0410\u0412\u041B \u041A\u0443\u0437\u0438\u043D\u043E"
 --- !u!1 &3784556820685472078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,8 +1184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 369.4, y: -169.7}
-  m_SizeDelta: {x: -947.1, y: 124.1}
+  m_AnchoredPosition: {x: 370.2, y: -165.7}
+  m_SizeDelta: {x: -673.03, y: 132.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784556820685472074
 CanvasRenderer:
@@ -1434,7 +1434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1534,7 +1534,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: "-\u0444\u0440\u043E\u043D\u0442?"
 --- !u!1 &3784556820934160418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,7 +1869,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3784556821014571006}
   m_OnClick:
     m_PersistentCalls:
@@ -2204,14 +2204,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 44
-    m_Alignment: 4
+    m_MaxSize: 38
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: " 1. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
 --- !u!1 &3784556821063748437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2436,8 +2436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.900024, y: -28.562504}
-  m_SizeDelta: {x: 91.80005, y: 57.125008}
+  m_AnchoredPosition: {x: 182.935, y: -28.59375}
+  m_SizeDelta: {x: 365.87, y: 57.1875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784556821151739884
 CanvasRenderer:
@@ -2530,7 +2530,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 1
+          m_StringArgument: " 1. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3784556821163041728
@@ -3100,8 +3100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.900024, y: -86.687515}
-  m_SizeDelta: {x: 91.80005, y: 57.125008}
+  m_AnchoredPosition: {x: 182.935, y: -86.78125}
+  m_SizeDelta: {x: 365.87, y: 57.1875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784556821448136688
 CanvasRenderer:
@@ -3194,7 +3194,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 2
+          m_StringArgument: " 2. \u0410\u0412\u041B \u041A\u0443\u0437\u0438\u043D\u043E"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3784556821481786545
@@ -3234,8 +3234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.900024, y: -144.81252}
-  m_SizeDelta: {x: 91.80005, y: 57.125008}
+  m_AnchoredPosition: {x: 182.935, y: -144.96875}
+  m_SizeDelta: {x: 365.87, y: 57.1875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784556821481786557
 CanvasRenderer:
@@ -3328,7 +3328,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 3
+          m_StringArgument: " 3. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3784556821526877469
@@ -3645,7 +3645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3784556821715482118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3741,8 +3741,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.900024, y: -202.93753}
-  m_SizeDelta: {x: 91.80005, y: 57.125008}
+  m_AnchoredPosition: {x: 182.935, y: -203.15625}
+  m_SizeDelta: {x: 365.87, y: 57.1875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784556821789726722
 CanvasRenderer:
@@ -3835,7 +3835,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 4
+          m_StringArgument: " 4. \u0410\u0412\u041B \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3784556821796033705
@@ -4611,7 +4611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4631,7 +4631,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 5
 --- !u!1 &3784556822135795018
 GameObject:
   m_ObjectHideFlags: 0
@@ -4651,7 +4651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3784556822135795025
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4897,7 +4897,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3784556822249312867}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00033479}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0022123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4907,8 +4907,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 369.4, y: -0}
-  m_SizeDelta: {x: -947.1, y: 0}
+  m_AnchoredPosition: {x: 319.7, y: -0}
+  m_SizeDelta: {x: -847.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784556822249312879
 CanvasRenderer:
@@ -5019,10 +5019,10 @@ MonoBehaviour:
   DropList: {fileID: 3784556820685472078}
   DropText: {fileID: 3784556820909821770}
   dropTxt:
-  - 1
-  - 2
-  - 3
-  - 4
+  - " 1. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
+  - " 2. \u0410\u0412\u041B \u041A\u0443\u0437\u0438\u043D\u043E"
+  - " 3. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
+  - " 4. \u0410\u0412\u041B \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
   selectedNum: 0
   selectedStr: 
   AllLinesArr: []
@@ -5469,14 +5469,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 44
-    m_Alignment: 4
+    m_MaxSize: 38
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4
+  m_Text: " 4. \u0410\u0412\u041B \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
 --- !u!1 &3784556822518150601
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,14 +5549,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 44
-    m_Alignment: 4
+    m_MaxSize: 38
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: " 3. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
 --- !u!1 &3784556822560925748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5850,8 +5850,8 @@ MonoBehaviour:
   - 6
   - 7
   - 8
-  selectedNum: 0
-  selectedStr: 
+  selectedNum: 5
+  selectedStr: 5
   AllLinesArr: []
 --- !u!114 &6224153256334920928
 MonoBehaviour:
