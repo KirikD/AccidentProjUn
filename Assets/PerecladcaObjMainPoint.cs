@@ -15,6 +15,7 @@ public class PerecladcaObjMainPoint : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             objPoint.transform.position = this.transform.GetChild(0).position;
+            objPoint.transform.rotation = this.transform.GetChild(0).rotation;
             // оутлайн
             this.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
@@ -28,8 +29,5 @@ public class PerecladcaObjMainPoint : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
