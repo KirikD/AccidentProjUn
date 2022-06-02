@@ -19,8 +19,8 @@ public class ControllerFeedback : MonoBehaviour
     {
         pointInstrumentLineika.transform.position = MainHeadPoint.transform.position;
         OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0025f);
-        Invoke("ReturnNullWidthOutline",9);
-        Vibbbro();
+        Invoke("ReturnNullWidthOutline",19);
+       // Vibbbro();
 
     }
     void ReturnNullWidthOutline()
