@@ -343,8 +343,8 @@ public class VagonSelector : MonoBehaviour
             if (IdealBaseItems[vagIndexList].OutsideRailsbool1) IdealCount += 1; if (IdealBaseItems[vagIndexList].NakatnoeOborudovaniebool1) IdealCount += 1; if (IdealBaseItems[vagIndexList].GidroOborudovaniebool1) IdealCount += 1;
             if (IdealBaseItems[vagIndexList].LiftTheVagonbool1) IdealCount += 1; if (IdealBaseItems[vagIndexList].LiftoneSidebool1) IdealCount += 1; if (IdealBaseItems[vagIndexList].UnloadCargebool1) IdealCount += 1;
             if (IdealBaseItems[vagIndexList].OutToOveralSizebool1) IdealCount += 1; if (IdealBaseItems[vagIndexList].Vibitabool1) IdealCount += 1;
-            Debug.Log(fullVagPathName + " Проверяем базу "  + TryesSumm);
-            if (TryesSumm >= IdealCount) // тут идет тупо если больше 3 правильных отв то мы прошли. а надо количество брать из базы сколько правильных трушек в тележки может и не одной тогда мы прошли
+            Debug.Log(fullVagPathName + " Проверяем базу i: " + IdealCount + " t: " + TryesSumm);
+            if (TryesSumm == IdealCount) // тут идет тупо если больше 3 правильных отв то мы прошли. а надо количество брать из базы сколько правильных трушек в тележки может и не одной тогда мы прошли
             {
                 tryQuestions += 1;
                 setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");
@@ -429,8 +429,8 @@ public class VagonSelector : MonoBehaviour
             if (IdealBaseItems[vagIndexList].OutsideRailsbool2) IdealCount += 1; if (IdealBaseItems[vagIndexList].NakatnoeOborudovaniebool2) IdealCount += 1; if (IdealBaseItems[vagIndexList].GidroOborudovaniebool2) IdealCount += 1;
             if (IdealBaseItems[vagIndexList].LiftTheVagonbool2) IdealCount += 1; if (IdealBaseItems[vagIndexList].LiftoneSidebool2) IdealCount += 1; if (IdealBaseItems[vagIndexList].UnloadCargebool2) IdealCount += 1;
             if (IdealBaseItems[vagIndexList].OutToOveralSizebool2) IdealCount += 1; if (IdealBaseItems[vagIndexList].Vibitabool2) IdealCount += 1;
-            Debug.Log(fullVagPathName + " Проверяем базу " + TryesSumm);
-            if (TryesSumm > IdealCount) {
+            Debug.Log(fullVagPathName + " Проверяем базу i: " + IdealCount + " t: " + TryesSumm);
+            if (TryesSumm == IdealCount) {
                 tryQuestions += 1;
                 setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); 
             }

@@ -29,22 +29,24 @@ public class ControllerFeedback : MonoBehaviour
      
     }
     public void detactFromHandTime()
-    {  Invoke("detactFromHand", 0.5f);  }
+    {  Invoke("detactFromHand", 1.5f);  }
     bool once = true;
+
     public void detactFromHand() {
       
         if (once)
         {
             UiObj.transform.transform.SetParent(null);
-            UiObj.transform.localScale *= 2; once = false; UiObj.transform.localPosition = new Vector3(UiObj.transform.localPosition.x, 
-            UiObj.transform.localPosition.y+0.4f, UiObj.transform.localPosition.z);
-            UiObj.transform.eulerAngles = new Vector3(0, -90, 0);
-            UiObj.transform.position = parObj.transform.position; Invoke("onceRestore", 19.25f);
-        }
+            UiObj.transform.localScale *= 2.5f; once = false; 
 
+            UiObj.transform.eulerAngles = new Vector3(0, -90, 0);
+            UiObj.transform.position = parObj.transform.position; //Invoke("onceRestore", 29.25f);
+            UiObj.transform.localPosition = new Vector3(UiObj.transform.localPosition.x, UiObj.transform.localPosition.y + 0.795f, UiObj.transform.localPosition.z);
+        }
         
     }
-    void onceRestore() { once = true; }
+    public void onceRestore() { once = true; }
+
     public void AttactToHand()
     {
 

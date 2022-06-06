@@ -124,9 +124,9 @@ Material:
     - _RoughScale: 0.5
     - _Scale: 0.095
     - _ScatteringPower: 0.1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.879
     - _Smoothness1: 0.5
-    - _Specular: 0.02
+    - _Specular: 0.2
     - _Specular1: 0.02
     - _Translucency: 0
     - _TranslucencyViewDependency: 0
