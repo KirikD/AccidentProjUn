@@ -112,8 +112,9 @@ public class MaterialChangerLaserPointer : MonoBehaviour
 
         UpdateMaterialState();
     }
-
-    private void LateUpdate()
+  public void MatLernInv() { Invoke(nameof(MatLern),0.1f); Invoke(nameof(MatLern), 0.61f); }
+    void MatLern()    { SetChildRendererCol(Color.white, Color.green, 1); }
+        private void LateUpdate()
     {
         UpdateMaterialState();
     }
