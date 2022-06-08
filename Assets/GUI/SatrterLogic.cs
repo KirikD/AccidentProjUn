@@ -36,7 +36,7 @@ public class SatrterLogic : MonoBehaviour
         if (MistakesCount/2 == 1)   EndTextTest.text = "Вы не прошли тест и допустили " + (MistakesCount / 2) + " ошибку ";
         if (MistakesCount == 0)
         {
-            EndTextTest.text = "Идеально пройденный тест! Нет ошибок!";
+            EndTextTest.text = "Тест пройден. Нет ошибок! нажмите начать чтобы приступить к осмотру, у вас есть 30 минут для этого";
             NextBtt.SetActive(true);
         }
         else

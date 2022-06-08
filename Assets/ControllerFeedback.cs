@@ -41,7 +41,7 @@ public class ControllerFeedback : MonoBehaviour
 
             UiObj.transform.eulerAngles = new Vector3(0, -90, 0);
             UiObj.transform.position = parObj.transform.position; //Invoke("onceRestore", 29.25f);
-            UiObj.transform.localPosition = new Vector3(UiObj.transform.localPosition.x-1, UiObj.transform.localPosition.y + 0.3f, UiObj.transform.localPosition.z);
+            UiObj.transform.localPosition = new Vector3(UiObj.transform.localPosition.x-1, UiObj.transform.localPosition.y + 0.01f, UiObj.transform.localPosition.z);
      //   }
         
     }
