@@ -94,6 +94,9 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             ClonedIco.layer = 5; // Пятый слой где UI чтобы оно было интерактивно
             Destroy(m_DraggingIcons[eventData.pointerId].GetComponent<CanvasGroup>());
             // Destroy(m_DraggingIcons[eventData.pointerId]);
+            transform.position = ClonedIco.transform.position;
+            transform.rotation = ClonedIco.transform.rotation;
+            transform.localScale = ClonedIco.transform.localScale;
             Invoke(nameof(MyFuncAddBittonsInside),1);
         }
 
@@ -106,6 +109,7 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         G1.transform.SetParent(ClonedIco.transform, false);
         GameObject G2 = Instantiate(InsideContentB);
         G2.transform.SetParent(ClonedIco.transform, false);
+        Destroy(ClonedIco);
         ///////////
     }
 

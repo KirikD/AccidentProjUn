@@ -28,14 +28,14 @@ public class CheckPointsCounter : MonoBehaviour
         {
             preFinalPanel.SetActive(true);
             PanelTitle.text = "Результат прохождения осмотра неисправностей " + finalScoreVagons + " и прошли все " + TeleportPointsCounter + "точек!";
-            preFinalPanelTitle.text = "Не все неисправности определены верно. Повторно осмотрите вагоны элементы которых подсвечены красным ";
+            preFinalPanelTitle.text = "Перейти к составлению плана АВР"; 
             preFinalUndoBtt.SetActive(false); preFinalNextBtt.SetActive(true);
         }
         else
         {
             preFinalPanel.SetActive(true);
             PanelTitle.text = "вы осмотрели всего " + TeleportPointsCounter + " точек из 15 а так же не правильно отметили неисправности их " + "40" + " а вы отметили всего " + finalScoreVagons;
-            preFinalPanelTitle.text = "Перейти к составлению плана АВР";
+            preFinalPanelTitle.text = "Не все неисправности определены верно. Повторно осмотрите вагоны элементы которых подсвечены красным ";
             preFinalUndoBtt.SetActive(true); preFinalNextBtt.SetActive(false);
         }
 
