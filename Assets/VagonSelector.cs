@@ -228,28 +228,37 @@ public class VagonSelector : MonoBehaviour
         PoezdItems[vagIndexList].AngleVagonToKuvetbool = AngleVagonToKuvet.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetbool = AngleVagonToKuvet.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.isOn; PoezdItems[vagIndexList].sAngleVagonToKuvetCenterbool = AngleVagonToKuvetCenter.transform.GetChild(1).GetComponent<Text>().text;
         PoezdItems[vagIndexList].VagonOnLeftSidebool = VagonOnLeftSide.isOn; PoezdItems[vagIndexList].sVagonOnLeftSidebool = VagonOnLeftSide.transform.GetChild(1).GetComponent<Text>().text;
-
+        int TryesSumm = 0;// проверяем правильно ли прошли IdealBaseItems 
         // проверяем правильно ли прошли IdealBaseItems
         setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red");
         if (PoezdItems[vagIndexList].DestroedRailbools) // если элемент тру то проверяем сопоставление
             if (PoezdItems[vagIndexList].DestroedRailbools == IdealBaseItems[vagIndexList].DestroedRailbools) // если в идеальной базе тоже этот элемент тру то мы ответили верно
-            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red"); TryesSumm++; }
         if (PoezdItems[vagIndexList].BoundsPathCorruptbool) // если элемент тру то проверяем сопоставление
             if (PoezdItems[vagIndexList].BoundsPathCorruptbool == IdealBaseItems[vagIndexList].BoundsPathCorruptbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
-            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red"); TryesSumm++; }
         if (PoezdItems[vagIndexList].FailsCargebool) // если элемент тру то проверяем сопоставление
             if (PoezdItems[vagIndexList].FailsCargebool == IdealBaseItems[vagIndexList].FailsCargebool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
-            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red"); TryesSumm++; }
      
         if (PoezdItems[vagIndexList].AngleVagonToKuvetbool) // если элемент тру то проверяем сопоставление
             if (PoezdItems[vagIndexList].AngleVagonToKuvetbool == IdealBaseItems[vagIndexList].AngleVagonToKuvetbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
-            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red"); TryesSumm++; }
         if (PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool) // если элемент тру то проверяем сопоставление
             if (PoezdItems[vagIndexList].AngleVagonToKuvetCenterbool == IdealBaseItems[vagIndexList].AngleVagonToKuvetCenterbool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
-            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red"); TryesSumm++; }
         if (PoezdItems[vagIndexList].VagonOnLeftSidebool) // если элемент тру то проверяем сопоставление
             if (PoezdItems[vagIndexList].VagonOnLeftSidebool == IdealBaseItems[vagIndexList].VagonOnLeftSidebool) // если в идеальной базе тоже этот элемент тру то мы ответили верно
-            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green"); tryQuestions += 1; }
+            { setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("red"); TryesSumm++; }
+
+        int IdealCount = 0;
+        if (IdealBaseItems[vagIndexList].DestroedRailbools) IdealCount += 1; if (IdealBaseItems[vagIndexList].BoundsPathCorruptbool) IdealCount += 1; if (IdealBaseItems[vagIndexList].FailsCargebool) IdealCount += 1;
+        if (IdealBaseItems[vagIndexList].AngleVagonToKuvetbool) IdealCount += 1; if (IdealBaseItems[vagIndexList].AngleVagonToKuvetCenterbool) IdealCount += 1; if (IdealBaseItems[vagIndexList].VagonOnLeftSidebool) IdealCount += 1;
+        if (TryesSumm == IdealCount) // тут идет тупо если больше 3 правильных отв то мы прошли. а надо количество брать из базы сколько правильных трушек в тележки может и не одной тогда мы прошли
+        {
+            tryQuestions += 1;
+            setElemOtvet.GetComponent<MaterialChangerLaserPointer>().TestQuestionTruestFunc("green");
+        }
     }
     public void FillListrails(string vagName)
     {
