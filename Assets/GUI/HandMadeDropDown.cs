@@ -8,10 +8,14 @@ public class HandMadeDropDown : MonoBehaviour
     public Text DropText;
      Toggle[] ToglessAll;
     HandMadeDropDown[] allDrops;
+    public bool setnull;
     void Start()
     {
         DropList.SetActive(false);
         ToglessAll = DropList.GetComponentsInChildren<Toggle>();
+
+        if (setnull)
+        DropText.text = "-"; DropText.color = Color.red;
     }
     [Header("Весь список Элементов")]
     public string[] dropTxt;
