@@ -17,11 +17,11 @@ public class LineikaCollInside : MonoBehaviour
     {
         if (other.gameObject.layer == lauer)
         {
-           // Invoke(nameof(InvokeEnter), Dauly);
+            Invoke(nameof(InvokeEnter), 11);
             CollFuncsEnter?.Invoke();
         }
     }
-    void InvokeEnter() { CollFuncsEnter?.Invoke(); }
+    void InvokeEnter() { Destroy(this.gameObject); } // очень тупой костыль удаляем обж после 16 секунд с ним взаимодействия чтоб он не занимал очередь...
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == lauer)

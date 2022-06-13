@@ -1386,6 +1386,7 @@ GameObject:
   - component: {fileID: 3784556820867612252}
   - component: {fileID: 3784556820867612253}
   - component: {fileID: 3784556820867612242}
+  - component: {fileID: 777159796097820424}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -1455,6 +1456,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u0421\u0420\u0415\u0414\u0421\u0422\u0412\u041E \u041F\u041E\u0414\u042A\u0415\u041C\u0410 "
+--- !u!114 &777159796097820424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784556820867612243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5423fd7d893c9c54cbf7678026e14892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropText: {fileID: 3784556820867612242}
 --- !u!1 &3784556820909821768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,6 +1914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropList: {fileID: 3784556821227354451}
   DropText: {fileID: 3784556820867612242}
+  setnull: 0
   dropTxt:
   - "\u041D\u0430\u043A\u0430\u0442\u043E\u0447\u043D\u043E\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435"
   - "\u0413\u0438\u0434\u0440\u0430\u0432\u043B\u0438\u0447\u0435\u0441\u043A\u043E\u0435
@@ -4781,6 +4796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropList: {fileID: 3784556821145188199}
   DropText: {fileID: 3784556822267163395}
+  setnull: 0
   dropTxt:
   - 1
   - 2
@@ -5018,6 +5034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropList: {fileID: 3784556820685472078}
   DropText: {fileID: 3784556820909821770}
+  setnull: 0
   dropTxt:
   - " 1. \u0412\u041F \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0431\u0443\u0440\u0433"
   - " 2. \u0410\u0412\u041B \u041A\u0443\u0437\u0438\u043D\u043E"
@@ -5841,6 +5858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropList: {fileID: 3784556820710962323}
   DropText: {fileID: 3784556822115498212}
+  setnull: 0
   dropTxt:
   - 1
   - 2
