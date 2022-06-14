@@ -17,10 +17,20 @@ namespace Valve.VR.InteractionSystem.Sample
             base.Awake();
 
             ui = this.GetComponentInParent<SkeletonUIOptions>();
+            //Invoke(nameof(OnButtonClick),1);
         }
-
+        void Start() {
+            if (this.gameObject.name == "thick glove")
+            {
+                Invoke(nameof(OnButtonClick), 1);
+             
+            }
+        }
+        public void SetGloves() { OnButtonClick(); }
         protected override void OnButtonClick()
         {
+            GameObject.Find("TestObjects").SetActive(false);
+            Debug.Log("RenderModelChangerUI  SetGloves " + this.gameObject.name);
             base.OnButtonClick();
 
             if (ui != null)
