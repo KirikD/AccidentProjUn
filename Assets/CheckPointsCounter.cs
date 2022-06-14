@@ -12,6 +12,8 @@ public class CheckPointsCounter : MonoBehaviour
     }
     public VagonSelector vagonSelector;
     public int finalScoreVagons = 0;
+
+    public Text miniInteractResults;
     // Update is called once per frame
     public void PointAdded(GameObject TeleportObj)
     {
@@ -40,5 +42,8 @@ public class CheckPointsCounter : MonoBehaviour
         }
 
     }
-
+    public void MiniInteractResultsF()
+    {
+        miniInteractResults.text ="телепорты= " + TeleportPointsCounter + "   осмотры= " + vagonSelector.tryQuestions;
+    }
     }
