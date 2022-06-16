@@ -16,14 +16,17 @@ public class FixSetResult : MonoBehaviour
         CancelInvoke(nameof(TimeToFalse));
         Invoke(nameof(TimeToFalse),3);
         setTruePunct.isOn = true;
-        //this.gameObject.GetComponent<ElementSetter>().ChangeElemUiName();
+      
 
         vs.FillListScepkaA("1"); vs.FillListScepkaB("2");
+       // this.gameObject.GetComponent<MaterialChangerLaserPointer>().DisableAllColiders(true);
     }
 
     // Update is called once per frame
     void TimeToFalse()
     {
+        this.gameObject.GetComponent<MaterialChangerLaserPointer>().DisableAllColiders(true);
         setTruePunct.transform.parent.parent.gameObject.SetActive(false);
+ 
     }
 }

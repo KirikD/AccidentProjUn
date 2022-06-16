@@ -38,6 +38,7 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         m_DraggingPlanes[eventData.pointerId] = canvas.GetComponent<RectTransform>();
 
         SetDraggedPosition(eventData);
+        draggingImage.rectTransform.localScale = Vector3.one * 0.5f;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -46,6 +47,7 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             SetDraggedPosition(eventData);
         }
+       
     }
 
     private void SetDraggedPosition(PointerEventData eventData)
@@ -62,7 +64,7 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             rectTransform.position = raycastResult.worldPosition + raycastResult.worldNormal * 0.001f; // add a little distance to avoid z-fighting
             rectTransform.rotation = Quaternion.LookRotation(raycastResult.worldNormal, raycastResult.gameObject.transform.up);
             // rectTransform.localEulerAngles = Vector3.zero;
-            rectTransform.localScale = Vector3.one*0.7f;
+            rectTransform.localScale = Vector3.one*0.5f;
         }
         else
         {
@@ -97,10 +99,11 @@ public class DragImage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             transform.position = ClonedIco.transform.position;
             transform.rotation = ClonedIco.transform.rotation;
             transform.localScale = ClonedIco.transform.localScale;
-            Invoke(nameof(MyFuncAddBittonsInside),1);
+            Invoke(nameof(MyFuncAddBittonsInside),0.1f);
         }
 
         m_DraggingIcons[eventData.pointerId] = null;
+        ClonedIco.GetComponent<RectTransform>().localScale = Vector3.one * 0.5f;
     }
     void MyFuncAddBittonsInside() 
     {
