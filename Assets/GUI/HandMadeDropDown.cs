@@ -6,7 +6,7 @@ public class HandMadeDropDown : MonoBehaviour
 {
     public GameObject DropList;
     public Text DropText;
-     Toggle[] ToglessAll;
+    Toggle[] ToglessAll;
     HandMadeDropDown[] allDrops;
     public bool setnull;
     void Start()
@@ -15,14 +15,20 @@ public class HandMadeDropDown : MonoBehaviour
         ToglessAll = DropList.GetComponentsInChildren<Toggle>();
 
         if (setnull)
-        DropText.text = "-"; DropText.color = Color.red;
+            DropText.text = "-"; DropText.color = Color.red;
     }
     [Header("Весь список Элементов")]
     public string[] dropTxt;
     [Header("Выбранный Элемент")] [Tooltip("Выбранный Элемент")]
-    public int selectedNum; 
+    public int selectedNum;
     public string selectedStr;
-    public void SetNum(string dropT)
+
+    public void SetNumT(Transform dropT)
+    {  
+      selectedStr = dropT.GetChild(1).GetComponent<Text>().text;
+        DropText.text = dropT.GetChild(1).GetComponent<Text>().text;
+    }
+     public void SetNum(string dropT)
     {
         for (int i = 0; i < dropTxt.Length; i++)
         {
@@ -33,7 +39,6 @@ public class HandMadeDropDown : MonoBehaviour
                 selectedStr = dropT;
                 DropText.text = dropT;
             }
-
 
         }
         DropList.SetActive(false);

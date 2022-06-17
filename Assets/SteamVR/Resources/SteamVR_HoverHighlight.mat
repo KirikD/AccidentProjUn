@@ -75,7 +75,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - g_flCornerAdjust: 0.5
+    - g_flCornerAdjust: 0
     - g_flOutlineWidth: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

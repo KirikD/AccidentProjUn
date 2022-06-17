@@ -148,7 +148,7 @@ Shader "Valve/VR/Silhouette"
 		{
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( i );
 
-			return UNITY_ACCESS_INSTANCED_PROP( Props, g_vOutlineColor );
+			return UNITY_ACCESS_INSTANCED_PROP( Props, g_vOutlineColor*4 );
 		}
 
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------------
