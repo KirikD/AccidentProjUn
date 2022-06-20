@@ -12,6 +12,9 @@ public class SatrterLogic : MonoBehaviour
     void Start()
     {
          player = GameObject.Find("Player");
+        playerCam = Camera.main.transform;
+        panelCanvas = GameObject.Find("CanvasOnHand").transform;
+
     }
     [Header("Текст окончания теста в конце теста")]
     public Text EndTextTest;
@@ -42,8 +45,16 @@ public class SatrterLogic : MonoBehaviour
         else
         { TestAgain.SetActive(true); }
     }
-    //
-    public void DragAvaterTo3DgameScen(Transform pos) // просто передвигаем плеера в старт игры ивсе
+    [Header("Костыль притягивающий интерфейс к руке если мы далеко отошли от него")]
+    public Transform playerCam;
+    public Transform panelCanvas;
+    public ControllerFeedback controllerFeedback;
+    void Update()
+    {
+        if (Vector3.Distance(playerCam.position, panelCanvas.position) > 2)
+        { controllerFeedback.AttactToHand(); }
+    }
+        public void DragAvaterTo3DgameScen(Transform pos) // просто передвигаем плеера в старт игры ивсе
     {
        
         player.transform.position = pos.position;

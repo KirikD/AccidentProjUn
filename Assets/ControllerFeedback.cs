@@ -31,28 +31,46 @@ public class ControllerFeedback : MonoBehaviour
     public void detactFromHandTime()
     {  Invoke("detactFromHand", 1.5f);  }
     bool once = true;
-
+    public bool activateFinalDetactFromHandEndScore = true;
+    public void ActivateFinalDetactFromHandEndScoreFunc() { activateFinalDetactFromHandEndScore = false; }
     public void detactFromHand() {
-      
-     //   if (once)
-      //  {
+     
             UiObj.transform.transform.SetParent(null);
             UiObj.transform.localScale *= 2.5f; once = false; 
 
             UiObj.transform.eulerAngles = new Vector3(0, -90, 0);
             UiObj.transform.position = parObj.transform.position; //Invoke("onceRestore", 29.25f);
-            UiObj.transform.localPosition = new Vector3(UiObj.transform.localPosition.x-1, UiObj.transform.localPosition.y + 0.01f, UiObj.transform.localPosition.z);
-     //   }
-        
+            UiObj.transform.localPosition = new Vector3(UiObj.transform.localPosition.x-1, UiObj.transform.localPosition.y + 0.01f, UiObj.transform.localPosition.z);   
     }
+    public void CancelInvokedetactFromHandTime() { CancelInvoke("detactFromHand"); CancelInvoke("detactFromHand"); }
     public void onceRestore() { once = true; }
-
+    bool isTimeDetachHandBool = false;
     public void AttactToHand()
     {
+       if (activateFinalDetactFromHandEndScore)
+       {
+          isTimeDetachHandBool = true;
+           UiObj.transform.SetParent(parObj.transform, false);
+           UiObj.transform.localPosition= initpos; UiObj.transform.localScale= initscal; UiObj.transform.localRotation= initRot ;
+       //   CancelInvoke("detactFromHand"); CancelInvoke("detactFromHand");
+        }
+    }
+    public void AttactToHandI() { Invoke(nameof(AttactToHand),4); }
+    public void detactFromHandSimple()
+    {
+        if (activateFinalDetactFromHandEndScore)
+        {
+            CancelInvoke(nameof(AttactToHand));
 
-        UiObj.transform.SetParent(parObj.transform, false);
-        UiObj.transform.localPosition= initpos; UiObj.transform.localScale= initscal; UiObj.transform.localRotation= initRot ;
-        CancelInvoke("detactFromHand"); CancelInvoke("detactFromHand"); 
+            UiObj.transform.transform.SetParent(null);
+            if (isTimeDetachHandBool)
+            {
+                UiObj.transform.localScale *= 1.25f; once = false;
+                UiObj.transform.position = parObj.transform.position;
+                isTimeDetachHandBool = false;
+               // Invoke(nameof(AttactToHand), 14);
+            }
+        }
     }
     void ReturnNullWidthOutline()
     { OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0f); }
@@ -69,7 +87,6 @@ public class ControllerFeedback : MonoBehaviour
     }
     static void Quit()
     {
-        
         Debug.Log("Quitting the Player");
     }
 
