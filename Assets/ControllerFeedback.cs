@@ -22,11 +22,20 @@ public class ControllerFeedback : MonoBehaviour
     }
     public void InstrumentSetPosLineika()
     {
+        CancelInvoke("ReturnNullWidthOutline");
         pointInstrumentLineika.transform.position = MainHeadPoint.transform.position;
         OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0025f);
-        Invoke("ReturnNullWidthOutline", 19);
+        Invoke("ReturnNullWidthOutline", 29);
         // Vibbbro();
-     
+
+    }
+    public void PosOutlLineika()
+    {
+        CancelInvoke("ReturnNullWidthOutline");
+        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0025f);
+        Invoke("ReturnNullWidthOutline", 29);
+        // Vibbbro();
+
     }
     public void detactFromHandTime()
     {  Invoke("detactFromHand", 1.5f);  }
@@ -55,7 +64,7 @@ public class ControllerFeedback : MonoBehaviour
        //   CancelInvoke("detactFromHand"); CancelInvoke("detactFromHand");
         }
     }
-    public void AttactToHandI() { Invoke(nameof(AttactToHand),4); }
+    public void AttactToHandI() { Invoke(nameof(AttactToHand),2); }
     public void detactFromHandSimple()
     {
         if (activateFinalDetactFromHandEndScore)
@@ -72,7 +81,7 @@ public class ControllerFeedback : MonoBehaviour
             }
         }
     }
-    void ReturnNullWidthOutline()
+    public void ReturnNullWidthOutline()
     { OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0f); }
         public void Vibbbro()
     {

@@ -11,7 +11,7 @@ public class HandMadeDropDown : MonoBehaviour
     public bool setnull;
     void Start()
     {
-        Debug.Log("DropList " + gameObject.name);
+        Debug.LogError("DropList " + gameObject.name);
         DropList.SetActive(false);
         ToglessAll = DropList.GetComponentsInChildren<Toggle>();
 
