@@ -206,17 +206,17 @@ public class MaterialChangerLaserPointer : MonoBehaviour
     public string TestQuestionTruest = "white"; // правильность ответа на тест по конкретному элементу
     public void TestQuestionTruestFunc(string ColorBOOL)// правильный цвет именно тут 
     {
-// ЕСЛИ требуется отметить что правильно а что нет лишь в конце то запоминаем этот бул на каждом эелементе и запускаем функцию присвоения цвета после прохождения по тагу в цикле всем эелементам
+        // ЕСЛИ требуется отметить что правильно а что нет лишь в конце то запоминаем этот бул на каждом эелементе и запускаем функцию присвоения цвета после прохождения по тагу в цикле всем эелементам
         TestQuestionTruest = ColorBOOL; // все что ниже убираем если хотем в конце запускать функцию
         if (ColorBOOL == "white") SetChildRendererCol(Color.white, Color.white, 2);
-        if (ColorBOOL == "green") SetChildRendererCol(Color.white, Color.green, 2);
+        if (ColorBOOL == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false); } 
         if (ColorBOOL == "red")     SetChildRendererCol(Color.red, Color.red, 4);
         //DisableAllColiders(true);
     }
     public void TestQuestionTruestFunc() // отложенная функция вызываем вконце чтобы расставить цвета
     {
         if (TestQuestionTruest == "white") SetChildRendererCol(Color.white, Color.white, 2);
-        if (TestQuestionTruest == "green") SetChildRendererCol(Color.white, Color.green, 2);
+        if (TestQuestionTruest == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false);  }
         if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
     }
     void EnabAllColls() { DisableAllColiders(true);  }
@@ -228,7 +228,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             allColls[i].disableThisColider(isOn);
     }
     MeshCollider[] bodies;
-    void disableThisColider(bool isOn) // отключим коллайдер
+    void disableThisColider(bool isOn) // отключим этот коллайдер
     { // MeshCollider[] bodies = GetComponentsInChildren<MeshCollider>();
          
         foreach (MeshCollider body in bodies)
