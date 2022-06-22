@@ -74,7 +74,7 @@ public class ControllerFeedback : MonoBehaviour
             UiObj.transform.transform.SetParent(null);
             if (isTimeDetachHandBool)
             {
-                UiObj.transform.localScale *= 1.25f; once = false;
+                UiObj.transform.localScale *= 0.75f; once = false;
                 UiObj.transform.position = parObj.transform.position;
                 isTimeDetachHandBool = false;
                // Invoke(nameof(AttactToHand), 14);

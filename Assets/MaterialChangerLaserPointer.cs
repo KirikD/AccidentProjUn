@@ -198,10 +198,8 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             }
         }
 
-        /* if (ChangeProp.Set(ref currentMat, targetMat))
-         {
-             SetChildRendererMaterial(targetMat);
-         }*/
+        // костыль который если цвет зеленый то отключаем коллайдер навсегда
+        if (TestQuestionTruest == "green") Invoke(nameof(InvokedisableThisColiderF), 0.15f);
     }
     public string TestQuestionTruest = "white"; // правильность ответа на тест по конкретному элементу
     public void TestQuestionTruestFunc(string ColorBOOL)// правильный цвет именно тут 
@@ -209,16 +207,18 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         // ЕСЛИ требуется отметить что правильно а что нет лишь в конце то запоминаем этот бул на каждом эелементе и запускаем функцию присвоения цвета после прохождения по тагу в цикле всем эелементам
         TestQuestionTruest = ColorBOOL; // все что ниже убираем если хотем в конце запускать функцию
         if (ColorBOOL == "white") SetChildRendererCol(Color.white, Color.white, 2);
-        if (ColorBOOL == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false); } 
+        if (ColorBOOL == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false); Invoke(nameof(InvokedisableThisColiderF),0.1f); } 
         if (ColorBOOL == "red")     SetChildRendererCol(Color.red, Color.red, 4);
         //DisableAllColiders(true);
+       
     }
     public void TestQuestionTruestFunc() // отложенная функция вызываем вконце чтобы расставить цвета
     {
         if (TestQuestionTruest == "white") SetChildRendererCol(Color.white, Color.white, 2);
-        if (TestQuestionTruest == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false);  }
+        if (TestQuestionTruest == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false); Invoke(nameof(InvokedisableThisColiderF), 0.1f);  }
         if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
     }
+    void InvokedisableThisColiderF() { disableThisColider(false); }
     void EnabAllColls() { DisableAllColiders(true);  }
     MaterialChangerLaserPointer[] allColls;
     public void DisableAllColiders(bool isOn) // отключим все коллайдеры

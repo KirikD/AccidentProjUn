@@ -14,7 +14,7 @@ public class FixSetResult : MonoBehaviour
     public void TruePunct()
     {
         CancelInvoke(nameof(TimeToFalse));
-        Invoke(nameof(TimeToFalse),3);
+        Invoke(nameof(TimeToFalse),2);
         setTruePunct.isOn = true;
       
 
