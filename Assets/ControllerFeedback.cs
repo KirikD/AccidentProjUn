@@ -24,7 +24,7 @@ public class ControllerFeedback : MonoBehaviour
     {
         CancelInvoke("ReturnNullWidthOutline");
         pointInstrumentLineika.transform.position = MainHeadPoint.transform.position;
-        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0025f);
+        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0001f);
         Invoke("ReturnNullWidthOutline", 29);
         // Vibbbro();
 
@@ -32,7 +32,7 @@ public class ControllerFeedback : MonoBehaviour
     public void PosOutlLineika()
     {
         CancelInvoke("ReturnNullWidthOutline");
-        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0025f);
+        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.0001f);
         Invoke("ReturnNullWidthOutline", 29);
         // Vibbbro();
 
@@ -74,7 +74,8 @@ public class ControllerFeedback : MonoBehaviour
             UiObj.transform.transform.SetParent(null);
             if (isTimeDetachHandBool)
             {
-                UiObj.transform.localScale *= 0.75f; once = false;
+                //UiObj.transform.localScale *= 0.75f; 
+                once = false;
                 UiObj.transform.position = parObj.transform.position;
                 isTimeDetachHandBool = false;
                // Invoke(nameof(AttactToHand), 14);
@@ -96,6 +97,8 @@ public class ControllerFeedback : MonoBehaviour
     }
     static void Quit()
     {
+        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.006f);
+        Debug.Log("Application ending after " + Time.time + " seconds");
         Debug.Log("Quitting the Player");
     }
 
