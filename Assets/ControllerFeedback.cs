@@ -97,7 +97,7 @@ public class ControllerFeedback : MonoBehaviour
     }
     static void Quit()
     {
-        OutlineSetWidth.SetFloat("g_flOutlineWidth", 0.006f);
+
         Debug.Log("Application ending after " + Time.time + " seconds");
         Debug.Log("Quitting the Player");
     }

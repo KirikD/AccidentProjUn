@@ -6,8 +6,9 @@ public class SimplePererascet : MonoBehaviour
 {
     public Text[] AutoReorderToggles;
     int numTog = 0;
-    void Start()
+    void SetPereschet()
     {
+        numTog  = 0 ;
         int children = transform.childCount;
         AutoReorderToggles = new Text[children];
         for (int i = 0; i < children; ++i)
@@ -20,11 +21,13 @@ public class SimplePererascet : MonoBehaviour
             }
             
         }
+        for (int ii = 0; ii < children; ++ii)
+        { AutoReorderToggles[ii].transform.parent.GetComponent<Toggle>().interactable = true; }
     }
 
     // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
-        
+        SetPereschet();
     }
 }

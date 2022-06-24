@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 using UnityEngine.Events;
 // This component shows the status that interacting with ColliderEventCaster
@@ -66,6 +67,7 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         AllGuiVagonsPanels = GameObject.Find("CanvasOnHand").GetComponent<VagonSelector>() ;
         allColls = GameObject.FindObjectsOfType<MaterialChangerLaserPointer>(); 
         bodies = GetComponentsInChildren<MeshCollider>();
+        TestQuestionTruest = "Null"; 
     }
 
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
@@ -212,11 +214,13 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         //DisableAllColiders(true);
        
     }
+
     public void TestQuestionTruestFunc() // отложенная функция вызываем вконце чтобы расставить цвета
     {
         if (TestQuestionTruest == "white") SetChildRendererCol(Color.white, Color.white, 2);
         if (TestQuestionTruest == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false); Invoke(nameof(InvokedisableThisColiderF), 0.1f);  }
         if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
+        try { if (TestQuestionTruest == "red" || TestQuestionTruest == "Null") SetPunctRed.color = Color.red+new Color(0.25f,0.25f,0.25f); } catch { }  // делаем пункты красные в случае неверных ответов просто меняем цвет.
     }
     void InvokedisableThisColiderF() { disableThisColider(false); }
     void EnabAllColls() { DisableAllColiders(true);  }
@@ -236,6 +240,8 @@ public class MaterialChangerLaserPointer : MonoBehaviour
             body.enabled = isOn;
         }
     }
+    [Header("пункты из первой большой таблицы красные в случае неверных ответов просто меняем цвет.")]
+    public Image SetPunctRed; // делаем пункты красные в случае неверных ответов просто меняем цвет.
     void EnabColiders() // включем  коллайдер
     { disableThisColider(true); }
     private void SetChildRendererCol(Color targetCol, Color outlColor, float width)
