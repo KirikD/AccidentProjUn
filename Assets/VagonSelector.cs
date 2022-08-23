@@ -86,7 +86,6 @@ public class VagonSelector : MonoBehaviour
     {
         ElementSetter.OnSelectedEvent += SetTogleFieldsToArry;
     }
-
     int vagIndexList; string fullVagPathName; string scepinf;
     GameObject setElemOtvet;
     public void SetTogleFieldsToArry(string vagName, GameObject Elem)

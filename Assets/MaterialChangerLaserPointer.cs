@@ -220,7 +220,8 @@ public class MaterialChangerLaserPointer : MonoBehaviour
         if (TestQuestionTruest == "white") SetChildRendererCol(Color.white, Color.white, 2);
         if (TestQuestionTruest == "green") { SetChildRendererCol(Color.white, Color.green, 2); disableThisColider(false); Invoke(nameof(InvokedisableThisColiderF), 0.1f);  }
         if (TestQuestionTruest == "red") SetChildRendererCol(Color.red, Color.red, 4);
-        try { if (TestQuestionTruest == "red" || TestQuestionTruest == "Null") SetPunctRed.color = Color.red+new Color(0.25f,0.25f,0.25f); } catch { }  // делаем пункты красные в случае неверных ответов просто меняем цвет.
+     //интерфейс в зависимости от неправильно выбранных вагонов будет подсвечиваться красным цветом
+      //  try { if (TestQuestionTruest == "red" || TestQuestionTruest == "Null") SetPunctRed.color = Color.green+new Color(0.25f,0.25f,0.25f); } catch { }  // делаем пункты красные в случае неверных ответов просто меняем цвет.
     }
     void InvokedisableThisColiderF() { disableThisColider(false); }
     void EnabAllColls() { DisableAllColiders(true);  }

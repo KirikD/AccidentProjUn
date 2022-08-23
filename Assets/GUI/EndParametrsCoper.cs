@@ -26,9 +26,5 @@ public class EndParametrsCoper : MonoBehaviour
         Debug.Log("ќутпут ќутпут" + gameObject.name);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

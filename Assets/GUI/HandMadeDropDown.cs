@@ -78,7 +78,7 @@ public class HandMadeDropDown : MonoBehaviour
     bool isOpenDropList;
 
     public CanvasGroup[] AllLinesArr;
-    public void OpenCloseDropList() //booleanVar = !booleanVar;
+    public void OpenCloseDropList() // booleanVar = !booleanVar;
     {
         HandMadeDropDown[] allDrops = GameObject.FindObjectsOfType<HandMadeDropDown>();
         for (int i = 0; i < allDrops.Length; i++)
